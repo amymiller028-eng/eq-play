@@ -1,0 +1,75 @@
+EQ XP: CHARACTER ART PROMPTS FOR CHATGPT
+=======================================
+
+Save every image into the "art" folder next to "EQ XP.html", using the exact
+file name shown. The game picks them up automatically. .png, .jpg and .webp all work.
+
+Use ONE ChatGPT chat for everything so the style stays consistent.
+
+
+1) STYLE SETUP (paste first)
+----------------------------
+I'm making characters for a workplace training game. Every image in this chat should
+use the same art style: stylized 3D character render like a modern life-simulation
+video game. Smooth glossy skin, slightly oversized expressive eyes, soft rounded
+features, bright saturated clothing, clean studio lighting, soft shadows, friendly
+and polished. Plain soft blue background. No text, no logos.
+
+
+2) SUPPORTING CAST (square head-and-shoulders portraits, looking at the camera)
+-------------------------------------------------------------------------------
+gloria-face.png  Gloria Chen, mentor: woman in her late 50s, East Asian, short silver
+                 hair, pearl earrings, plum blazer, warm wise smile.
+jordan-face.png  Jordan Blake, office friend: man in his late 20s, Black, short twists,
+                 mustard hoodie over a white tee, playful grin.
+priya-face.png   Priya Shah, finance: woman in her early 30s, South Asian, long dark hair
+                 in a low ponytail, teal cardigan, slightly harried expression.
+(dana-face.png is already done.)
+
+
+3) PLAYER AVATAR POOL (the "Randomize avatar" button shuffles these)
+--------------------------------------------------------------------
+Ask for grids of 9. Save them as grid-1.png, grid-2.png, grid-3.png, grid-4.png.
+The game cuts each grid into 9 separate people automatically.
+
+Paste this, changing the 9 descriptions each time:
+
+  Make one square image: a 3x3 grid of 9 equal square head-and-shoulders portraits,
+  each person centered and looking at the camera, separated by thin white lines,
+  all in the same style and soft blue background. Mix clothing between business
+  casual and casual. The 9 people:
+
+Grid 1: 1. East Asian man, 20s, undercut  2. Black woman, 40s, short natural hair
+        3. White man, 50s, beard and glasses  4. Latina woman, 20s, long wavy hair
+        5. South Asian man, 30s, turban  6. Middle Eastern woman, 30s, hijab
+        7. Indigenous man, 40s, long braid  8. White woman, 60s, grey bob
+        9. Mixed-race non-binary person, 20s, curly pink hair
+Grid 2: 1. Black man, 30s, fade haircut  2. East Asian woman, 50s, short grey hair
+        3. Latino man, 20s, curly hair  4. White woman, 30s, red ponytail
+        5. Pacific Islander man, 40s, wavy hair and goatee
+        6. South Asian woman, 20s, nose ring and braid  7. White man, 20s, freckles
+        8. Black woman, 60s, silver locs  9. Middle Eastern man, 50s, salt-and-pepper beard
+Grid 3: 1. Southeast Asian woman, 30s, bangs  2. White man, 40s, bald with beard
+        3. Black non-binary person, 30s, shaved head and earrings
+        4. Latina woman, 50s, short curly hair and glasses  5. East Asian man, 40s, glasses
+        6. White woman, 20s, blonde space buns  7. South Asian man, 60s, white mustache
+        8. Mixed-race woman, 30s, big curly afro  9. Indigenous woman, 20s, long straight hair
+Grid 4: 1. Middle Eastern woman, 20s, long dark waves  2. Black man, 50s, grey beard and glasses
+        3. White non-binary person, 30s, short teal hair  4. East Asian woman, 20s, long straight hair
+        5. Latino man, 40s, mustache  6. South Asian woman, 40s, short bob
+        7. White man, 30s, man bun  8. Black woman, 20s, braids in a high bun
+        9. Southeast Asian man, 30s, wavy hair and dimples
+
+
+4) DANA SCENE IMAGES (optional, wide 3:2, viewer's point of view across a desk)
+-------------------------------------------------------------------------------
+Same Dana as dana-face.png (curly dark hair, black glasses, denim jacket), in her
+office with a desk, plants and an open laptop.
+scene-laptop.png   Dana glancing at her laptop instead of the viewer, tight distracted smile.
+scene-serious.png  Dana leaning forward, gesturing, making a serious point.
+scene-talk.png     Dana rubbing her temple, honest and slightly vulnerable.
+scene-listen.png   Dana listening closely, leaning in, small encouraging nod.
+scene-smile.png    Dana smiling warmly, relieved, holding a coffee mug.
+scene-wide.png     Wide shot of Dana's office from the doorway, Dana at her desk.
+
+If someone drifts off-model, reply: "Keep [name] exactly like the first portrait."
