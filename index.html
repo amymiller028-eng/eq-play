@@ -881,6 +881,14 @@ body::after{background:radial-gradient(ellipse at 50% 40%,rgba(0,30,70,.5),rgba(
 .spot:hover{background:#45f2b8}
 .spot.done{background:#8d99a8;color:#fff}
 @media (max-width:600px){.hud{grid-template-columns:minmax(0,1fr);gap:8px}.hud-me{justify-self:start;padding-right:34px}.hud-me .face{width:44px;height:44px}.xpbar{width:100px}.hud-in{justify-self:stretch;justify-content:space-around}.meter{width:64px}.hud-me{max-width:calc(100% - 100px)}.xpbar{width:72px}.hud .soundbtn{top:12px;bottom:auto;right:12px}.homebtn{right:58px}}
+
+.r-ach.locked{opacity:1}
+.r-ach.locked .badge,.r-ach.locked b,.r-ach.locked small{opacity:.55}
+.r-achgo{margin-top:6px;border:0;cursor:pointer;clip-path:var(--slant);background:#ffd34d;color:#3a2a00;font:900 italic 11px var(--head);text-transform:uppercase;letter-spacing:.05em;padding:6px 14px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.r-achgo:hover{background:#ffe38a}
+.r-achgo:focus-visible{background:#fff}
+/* friendship meter stays visible on phones during lunch */
+@media (max-width:860px){.hud-where:has(#friendBar:not([hidden])){display:block;grid-column:1/-1;justify-self:stretch;padding:6px 18px}.hud-where:has(#friendBar:not([hidden])) #hudTime{display:none}.friend{min-width:0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -2625,6 +2633,11 @@ function toughestMoment(){
   const list = Object.values(by).filter(m => m.p < m.n * 3).sort((a, b) => a.p / a.n - b.p / b.n || a.si - b.si);
   return list[0] || null;
 }
+function achStep(id){
+  const has = (st, needle) => { try { return JSON.stringify(st).includes(needle); } catch (e) { return false; } };
+  const i = STEPS.findIndex(st => (id === 'perspective' || id === 'exit') ? st.type === 'hub' : id === 'name' ? /^feel/.test(st.type || '') : id === 'pause' ? has(st, '"fx":"breathe"') : has(st, '"ach":"' + id + '"'));
+  return i >= 0 && SNAP[i] ? i : -1;
+}
 function startReplay(m){
   REPLAY = {i:m.si, final:clone(S), title:m.title, before:xpNow()};
   S = clone(SNAP[m.si]);
@@ -2695,8 +2708,11 @@ function renderEnd(replayed){
   const perfect = total >= TOTAL_MAX;
   const RANKS = [[.9, 'EQ Master'], [.7, 'Room Reader'], [.45, 'Rising Star'], [0, 'Rookie']];
   const rank = RANKS.find(([t]) => pct >= t)[1];
+  const missing = ACHS.filter(a => !S.ach.includes(a.id));
   const nextHtml = perfect
-    ? `<div class="r-perfect"><b>Perfect run!</b><span>You used every skill at its best. Try the other scenario next.</span></div>`
+    ? (missing.length
+      ? `<div class="r-perfect"><b>Perfect score!</b><span>You used every skill at its best, but ${missing.length === 1 ? 'one achievement is' : missing.length + ' achievements are'} still locked. Each one is another way to use your EQ.${S.replayUsed ? '' : ' Pick one below and replay that moment to earn it.'}</span></div>`
+      : `<div class="r-perfect"><b>Perfect run!</b><span>Every skill maxed and every achievement earned. Try the other scenario next.</span></div>`)
     : (() => { const f = focusTip(weakest.k); return `<div class="r-next"><div class="r-label">Your next move · ${weakest.full}</div><p>${f ? `<span>${esc(f.moment)}</span> ${esc(f.tip)}` : esc(TIPS[weakest.k])}</p></div>`; })();
   const frGame = SCEN !== 'lunch' ? '' : `<div class="r-sec"><div class="r-label">Your friendship with ${esc(FRIEND.name)}</div>
       <div class="r-fr"><div class="r-frend"><small>Started</small><b>${frLabel(startV)}</b></div>
@@ -2714,7 +2730,8 @@ function renderEnd(replayed){
     ${nextHtml}
     ${frGame}
     <div class="r-sec"><div class="r-label">Achievements · ${S.ach.length} of ${ACHS.length}</div>
-      <div class="r-achs">${ACHS.map(a => { const got = S.ach.includes(a.id); return `<div class="r-ach${got ? '' : ' locked'}">${badge(a, !got)}<b>${a.name}</b><small>${esc(a.how)}</small></div>`; }).join('')}</div></div>
+      <div class="r-achs">${ACHS.map(a => { const got = S.ach.includes(a.id), si = got || S.replayUsed ? -1 : achStep(a.id); return `<div class="r-ach${got ? '' : ' locked'}">${badge(a, !got)}<b>${a.name}</b><small>${esc(a.how)}</small>${si >= 0 ? `<button class="r-achgo" type="button" data-si="${si}" data-name="${esc(a.name)}">Replay to earn</button>` : ''}</div>`; }).join('')}</div>
+      ${!S.replayUsed && missing.length ? '<p class="r-toughname">You get one replay per game. Use it on your toughest moment or to chase an achievement.</p>' : ''}</div>
     <div class="r-btns">${tough ? `<button class="btn big ghost2" id="resReplay">Replay your toughest moment</button>` : ''}<button class="btn big" id="resAgain">Play again</button></div>
     ${tough ? `<p class="r-toughname">Toughest moment: ${esc(tough.title)}</p>` : ''}
   </div>`;
@@ -2730,6 +2747,9 @@ function renderEnd(replayed){
     <p style="margin-top:20px"><button class="btn" id="againBtn">Play again</button></p>`;
   paintHud(null);
   if ($('resReplay')) $('resReplay').onclick = () => startReplay(tough);
+  document.querySelectorAll('.r-achgo').forEach(b => b.onclick = () => {
+    startReplay({si:+b.dataset.si, title:'Chasing ' + b.dataset.name});
+  });
   $('resAgain').onclick = () => { SFX.armed = false; run++; $('results').hidden = true; $('game').hidden = true; $('hud').hidden = true; $('dayCard').hidden = true; show('scenScreen'); paintFaces($('scenScreen')); };
 }
 
