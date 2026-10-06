@@ -2528,12 +2528,12 @@ const STEPS_LUNCH = [
    subs:{who:'maya', x:'"Sorry. I know I keep bringing this up. You\'re probably sick of hearing about it."'},
    subsIf:[{when:S => S.flags.sighed, why:'you sighed "We\'ve been over this"', subs:{who:'maya', x:'"Sorry. I know, \'we\'ve been over this.\' You\'re probably sick of hearing about it."'}}],
    type:'choice', options:[
-    {x:'"Can I share an observation? I get frustrated when we circle back, and I think I\'ve pulled away. Can we fix that?"', p:3, ach:'repair', fr:{you:3, maya:3}, concept:'Repairing the relationship',
-     say:'"…Thank you for saying that. I\'ve felt you pulling away and didn\'t know why. Yeah. Let\'s figure it out."',
-     fb:'You asked before sharing, named the strain honestly, owned your part, and invited Maya in. That\'s how a strained relationship turns around.'},
+    {x:'"I\'m not sick of you. I\'ve pulled back lately, and that\'s on me. I want to be a better friend. What would help?"', p:3, ach:'repair', fr:{you:3, maya:3}, concept:'Repairing the relationship',
+     say:'"…Really? Thank you. I\'ve felt you pulling away and didn\'t know why. I think I just need to feel heard sometimes."',
+     fb:'You reassured Maya first, owned your part without blaming them, and asked what would help. That\'s how a strained relationship turns around.'},
     {x:'"Yeah, a little. I give advice and nothing changes. It\'s hard having the same conversation."', p:2, fr:{you:2}, concept:'Honoring your feelings',
      say:'"Oh. Okay." (Maya looks away.)',
-     fb:'Being honest about how you feel matters, and it does move the relationship forward. But given Maya\'s body language right now, asking "Can I share an observation?" first would have honored your feelings and landed better.'},
+     fb:'Being honest about how you feel matters. But Maya just said they\'re worried they\'re a burden, so leading with your frustration confirms it. Reassuring them first, then owning your part, would land better.'},
     {x:'"No, it\'s fine! Really. I\'m always happy to listen, you know that."', p:1, fr:{you:-1, maya:1}, concept:'Avoiding the strain',
      say:'"Okay. Good." (The frustration rides back to the office with you.)',
      fb:'It smooths over the moment, but the strain is still there for you. Unspoken frustration tends to come back as distance.'},
@@ -2824,7 +2824,9 @@ new MutationObserver(() => {
   if ($('office').hidden || c.querySelector('.fb')){ document.body.classList.remove('reading'); return; }
   // read first: a question in a conversation scene waits until the player is ready to respond
   const ask = c.querySelector('.opts,.chips,.skillpick');
-  if (ask && matchMedia('(min-width:821px)').matches && $('subs').textContent.trim()) document.body.classList.add('reading');
+  // read first only when a new scene starts, not between parts of the same moment
+  const fresh = S && String(S.i) !== c.dataset.gate;
+  if (ask && fresh && matchMedia('(min-width:821px)').matches && $('subs').textContent.trim()){ c.dataset.gate = S.i; document.body.classList.add('reading'); }
   else document.body.classList.remove('reading');
   c.classList.remove('enter'); void c.offsetWidth; c.classList.add('enter');
 }).observe(document.getElementById('card'), {childList:true});
@@ -3158,7 +3160,7 @@ async function go(i){
     SFX.armed = true;
     setTime('Wednesday · 12:30 PM'); setConvo('maya'); setLunchView('close'); showScene('office');
     $('sceneTitle').textContent = $('hudPlace').textContent = CLOSE.maya.place;
-    $('ptag').textContent = 'Wednesday · 12:30 PM'; subs({who:'scene', x:'Maya is already at a table by the window and waves, a little less brightly than usual.'});
+    $('ptag').textContent = 'Wednesday · 12:30 PM'; subs(null);
     $('card').innerHTML = `<div class="comp-chip"><i></i>Lunch break</div><h2>${esc('Lunch with Maya')}</h2><p class="prompt">Friends since college. Lately it\'s been strained.</p>`;
     await dayCard('Lunch', 'Wednesday, 12:30 PM', 'A lunch break with Maya, your friend since college. Lately things have been strained: Maya keeps bringing up the same problem at work, you keep giving the same advice, and nothing changes. You haven\'t really talked in two weeks.', 'Go to lunch');
     if (my === run) go(S.i + 1);
@@ -3194,7 +3196,6 @@ async function go(i){
     const cbl = (st.subsIf || []).find(c => c.when(S)); if (cbl){ st = {...st, subs:cbl.subs}; CALLBACK = cbl.why; }
     $('ptag').textContent = st.time; subs(st.subs);
   }
-  maybeSurprise(st);
   if (st.incoming){
     $('card').innerHTML = `<div class="comp-chip"><i></i>Incoming</div><h2>Your screen is lighting up…</h2>
       <p class="prompt">Watch your screen. Notifications are coming in.</p><div class="wait"><i></i>Waiting for messages</div>`;
