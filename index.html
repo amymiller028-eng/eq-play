@@ -2183,7 +2183,7 @@ const STEPS_BOARD = [
    prompt:'What\'s your first move?',
    type:'choice', options:[
     {x:'Fire back right away with a stream of quick messages, matching her pace.', p:1, fx:'rapid', concept:'Emotional contagion',
-     fb:'Some teams work this way, and if rapid back-and-forth is your normal rhythm with Dana it may feel natural. Watch for emotional contagion: stress spreads fast in quick messages, and now you\'re both moving at her anxious pace. It works, but it isn\'t the most effective option.'},
+     fb:'Some teams work this way, and if rapid back-and-forth is your normal rhythm with Dana, it may feel natural. Watch for emotional contagion: stress spreads fast in quick messages, and now you\'re both moving at her anxious pace. It works, but it isn\'t the most effective option.'},
     {x:'Turn on Do Not Disturb and work silently until it\'s done.', p:1, fx:'dnd', concept:'Managing impact',
      fb:'Protecting your focus is real self-management. The cost: Dana is left guessing, and silence often brings more messages. A one-line heads-up would keep your focus and calm her down.'},
     {x:'Take three slow breaths, check where the project really stands, then reply.', p:3, fx:'breathe', concept:'Pause before responding',
@@ -3579,7 +3579,7 @@ function renderEnd(replayed){
   if (SCEN === 'lunch'){
     setConvo('maya'); $('danaBig').className = 'pose-' + (S.fr.maya >= 3 ? 'smile' : 'listen');
     $('ptag').textContent = 'Wednesday · 1:30 PM'; setLunchView('two');
-    if (S.flags.walked) subs({who:'scene', x:`${FRIEND.name}\u2019s chair is empty. Their half of the check is already paid.`});
+    if (S.flags.walked) subs({who:'scene', x:`${FRIEND.name}\u2019s chair is empty. The check is already paid.`});
     else subs({who:'maya', x: S.fr.maya >= 3 ? '"Thank you. I really needed this today."' : '"Thanks for lunch. I\'m glad we did this."'});
     $('sceneTitle').textContent = 'Debrief'; setTime('Wednesday · 1:30 PM');
   } else {
@@ -4211,7 +4211,7 @@ const wireEnd = (againId, fn) => { $(againId).onclick = fn; $('toHub_' + againId
 
 /* ---------- Greet people by name (3 levels) ---------- */
 const NG_NAMES = ["Priyanka", "Marcus", "Lena", "Diego", "Hana", "Tobias", "Amara", "Owen", "Sofia", "Kenji", "Nadia", "Eli", "Grace", "Mateo", "Imani", "Felix", "Zara", "Liam", "Rosa", "Arjun", "Maya", "Theo", "Leila", "Jonah", "Camila", "Dev", "Ines", "Rafael", "Noor", "Caleb", "Yuki", "Bianca"];
-const NG_FACTS = ["just moved here from Denver", "has a dog named Biscuit", "runs the Tuesday trivia night", "makes amazing sourdough", "is training for a half marathon", "just joined the design team", "plays bass in a weekend band", "is learning Italian", "grew up on a farm", "collects vintage vinyl", "just got back from Japan", "volunteers at the animal shelter", "is a huge board game fan", "paints watercolors on weekends", "rides their bike to work every day", "has twin toddlers", "used to be a professional dancer", "is obsessed with true crime podcasts", "grows tomatoes on their balcony", "speaks four languages", "just adopted a rescue cat", "is planning a trip to Iceland", "brews their own kombucha", "was a camp counselor for ten summers", "is building a tiny house", "loves rock climbing", "bakes a different cake every Friday", "is learning to play the cello", "grew up in Nairobi", "restores old motorcycles", "is a die-hard hockey fan", "just finished their first novel", "makes their own hot sauce", "does stand-up comedy on open-mic nights", "is teaching themselves to code", "has visited 30 countries", "surfs before work most mornings", "knits sweaters for their whole family", "used to work at a zoo", "is a crossword fanatic", "just moved here from Toronto", "keeps bees in their backyard", "plays in a kickball league", "is renovating a 1920s house", "sings in a community choir", "has a parrot that says hello", "was born on a sailboat", "is training their puppy for agility", "loves 1,000-piece puzzles", "just ran their first 5K", "grew up in a family of eight", "teaches yoga on Sundays", "is a pickleball champion at their gym", "roasts their own coffee beans", "has seen every Marvel movie twice", "just learned to scuba dive", "makes pottery in their garage", "is a volunteer firefighter", "collects vintage cameras", "cooks a new cuisine every week"];
+const NG_FACTS = [{"me": "just moved here from Denver", "they": "just moved here from Denver"}, {"me": "have a dog named Biscuit", "they": "has a dog named Biscuit"}, {"me": "run the Tuesday trivia night", "they": "runs the Tuesday trivia night"}, {"me": "make amazing sourdough", "they": "makes amazing sourdough"}, {"me": "am training for a half marathon", "they": "is training for a half marathon"}, {"me": "just joined the design team", "they": "just joined the design team"}, {"me": "play bass in a weekend band", "they": "plays bass in a weekend band"}, {"me": "am learning Italian", "they": "is learning Italian"}, {"me": "grew up on a farm", "they": "grew up on a farm"}, {"me": "collect vintage vinyl", "they": "collects vintage vinyl"}, {"me": "just got back from Japan", "they": "just got back from Japan"}, {"me": "volunteer at the animal shelter", "they": "volunteers at the animal shelter"}, {"me": "am a huge board game fan", "they": "is a huge board game fan"}, {"me": "paint watercolors on weekends", "they": "paints watercolors on weekends"}, {"me": "ride my bike to work every day", "they": "rides a bike to work every day"}, {"me": "have twin toddlers", "they": "has twin toddlers"}, {"me": "used to be a professional dancer", "they": "used to be a professional dancer"}, {"me": "am obsessed with true crime podcasts", "they": "is obsessed with true crime podcasts"}, {"me": "grow tomatoes on my balcony", "they": "grows tomatoes on a balcony garden"}, {"me": "speak four languages", "they": "speaks four languages"}, {"me": "just adopted a rescue cat", "they": "just adopted a rescue cat"}, {"me": "am planning a trip to Iceland", "they": "is planning a trip to Iceland"}, {"me": "brew my own kombucha", "they": "brews homemade kombucha"}, {"me": "was a camp counselor for ten summers", "they": "was a camp counselor for ten summers"}, {"me": "am building a tiny house", "they": "is building a tiny house"}, {"me": "love rock climbing", "they": "loves rock climbing"}, {"me": "bake a different cake every Friday", "they": "bakes a different cake every Friday"}, {"me": "am learning to play the cello", "they": "is learning to play the cello"}, {"me": "grew up in Nairobi", "they": "grew up in Nairobi"}, {"me": "restore old motorcycles", "they": "restores old motorcycles"}, {"me": "am a die-hard hockey fan", "they": "is a die-hard hockey fan"}, {"me": "just finished my first novel", "they": "just finished writing a first novel"}, {"me": "make my own hot sauce", "they": "makes homemade hot sauce"}, {"me": "do stand-up comedy at open mics", "they": "does stand-up comedy at open mics"}, {"me": "am learning to code", "they": "is learning to code"}, {"me": "have visited 30 countries", "they": "has visited 30 countries"}, {"me": "surf before work most mornings", "they": "surfs before work most mornings"}, {"me": "knit sweaters for my whole family", "they": "knits sweaters for the whole family"}, {"me": "used to work at a zoo", "they": "used to work at a zoo"}, {"me": "am a crossword fanatic", "they": "is a crossword fanatic"}, {"me": "just moved here from Toronto", "they": "just moved here from Toronto"}, {"me": "keep bees in my backyard", "they": "keeps bees in the backyard"}, {"me": "play in a kickball league", "they": "plays in a kickball league"}, {"me": "am renovating a 1920s house", "they": "is renovating a 1920s house"}, {"me": "sing in a community choir", "they": "sings in a community choir"}, {"me": "have a parrot that says hello", "they": "has a parrot that says hello"}, {"me": "was born on a sailboat", "they": "was born on a sailboat"}, {"me": "am training my puppy for agility", "they": "is training a puppy for agility"}, {"me": "love 1,000-piece puzzles", "they": "loves 1,000-piece puzzles"}, {"me": "just ran my first 5K", "they": "just ran a first 5K"}, {"me": "grew up in a family of eight", "they": "grew up in a family of eight"}, {"me": "teach yoga on Sundays", "they": "teaches yoga on Sundays"}, {"me": "am the pickleball champ at my gym", "they": "is the pickleball champ at the gym"}, {"me": "roast my own coffee beans", "they": "roasts coffee beans at home"}, {"me": "have seen every Marvel movie twice", "they": "has seen every Marvel movie twice"}, {"me": "just learned to scuba dive", "they": "just learned to scuba dive"}, {"me": "make pottery in my garage", "they": "makes pottery in the garage"}, {"me": "am a volunteer firefighter", "they": "is a volunteer firefighter"}, {"me": "collect vintage cameras", "they": "collects vintage cameras"}, {"me": "cook a new cuisine every week", "they": "cooks a new cuisine every week"}];
 const NG_LEVELS = [{n:4, name:'Coffee chat', where:'Four teammates grab coffee with you on your first day.'},
                    {n:6, name:'Team welcome', where:'Your new team throws you a welcome lunch.'},
                    {n:8, name:'All-hands', where:'Eight people from across the company come say hi at the all-hands.'}];
@@ -4230,8 +4230,8 @@ function runNames(level){
   const faces = shuf(POOL.filter((_, j) => j !== lastPick)).slice(0, L.n);
   const recent = store.get('ngRecent', []);
   const names = shuf(NG_NAMES).slice(0, L.n);
-  const facts = shuf(NG_FACTS.filter(f => !recent.includes(f))).concat(shuf(NG_FACTS.filter(f => recent.includes(f)))).slice(0, L.n);
-  store.set('ngRecent', recent.concat(facts).slice(-24));
+  const facts = shuf(NG_FACTS.filter(f => !recent.includes(f.they))).concat(shuf(NG_FACTS.filter(f => recent.includes(f.they)))).slice(0, L.n);
+  store.set('ngRecent', recent.concat(facts.map(f => f.they)).slice(-24));
   const people = faces.map((f, i) => ({face:f.src, name:names[i], fact:facts[i], ok:0}));
   let k = 0, said = 0;
   const intro = () => {
@@ -4244,7 +4244,7 @@ function runNames(level){
     const p = people[k];
     const greets = shuf([[`Nice to meet you, ${p.name}!`, 1], ['Nice to meet you!', 0]]);
     $('mgBody').innerHTML = `<div class="d-meta"><span>Meeting ${k + 1} / ${L.n}</span></div>
-      <div class="n-card big"><span class="n-face" style="background-image:url('${p.face}')"></span><div class="n-hi">“Hi! I’m <b>${esc(p.name)}</b>, and I ${esc(p.fact)}.”</div></div>
+      <div class="n-card big"><span class="n-face" style="background-image:url('${p.face}')"></span><div class="n-hi">“Hi! I’m <b>${esc(p.name)}</b>, and ${esc(p.fact.me.startsWith('am ') ? 'I’m ' + p.fact.me.slice(3) : 'I ' + p.fact.me)}.”</div></div>
       <div class="v-label"><b>Your reply</b></div>
       <div class="v-pick">${greets.map((g, j) => `<button class="v-btn ng-say" type="button" data-j="${j}">${esc(g[0])}</button>`).join('')}</div><div class="d-fb" id="dFb"></div>`;
     $('mgBody').querySelectorAll('.ng-say').forEach(b => b.onclick = () => {
@@ -4269,18 +4269,18 @@ function runNames(level){
         $('nName').querySelectorAll('button').forEach((b, j) => b.onclick = () => {
           const ok = nameOpts[j] === p.name; if (ok){ score++; p.ok++; SFX.xp && SFX.xp(); }
           $('nName').querySelectorAll('button').forEach((x, m) => { x.disabled = true; if (nameOpts[m] === p.name) x.classList.add('best'); else if (m === j) x.classList.add('bad'); });
-          const factOpts = shuf([p.fact, ...shuf(people.filter(x => x !== p)).slice(0, 2).map(x => x.fact)]);
-          $('nFact').innerHTML = `<div class="v-label"><b>Bonus</b> What do you remember about ${esc(p.name)}?</div><div class="d-opts">${factOpts.map(f => `<button class="d-opt" type="button">They ${esc(f)}</button>`).join('')}</div>`;
+          const factOpts = shuf([p.fact.they, ...shuf(people.filter(x => x !== p)).slice(0, 2).map(x => x.fact.they)]);
+          $('nFact').innerHTML = `<div class="v-label"><b>Bonus</b> What do you remember about ${esc(p.name)}?</div><div class="d-opts">${factOpts.map(f => `<button class="d-opt" type="button">${esc(f.charAt(0).toUpperCase() + f.slice(1))}</button>`).join('')}</div>`;
           $('nFact').querySelectorAll('.d-opt').forEach((fb, m) => fb.onclick = () => {
-            const ok2 = factOpts[m] === p.fact; if (ok2){ score++; p.ok++; SFX.xp && SFX.xp(); }
-            $('nFact').querySelectorAll('.d-opt').forEach((x, n) => { x.disabled = true; if (factOpts[n] === p.fact) x.classList.add('best'); else if (n === m) x.classList.add('bad'); });
+            const ok2 = factOpts[m] === p.fact.they; if (ok2){ score++; p.ok++; SFX.xp && SFX.xp(); }
+            $('nFact').querySelectorAll('.d-opt').forEach((x, n) => { x.disabled = true; if (factOpts[n] === p.fact.they) x.classList.add('best'); else if (n === m) x.classList.add('bad'); });
             setTimeout(() => { i++; next(); }, 1100);
           });
         });
       } else {
         const lineup = shuf([p, ...shuf(people.filter(x => x !== p)).slice(0, Math.min(3, people.length - 1))]);
         $('mgBody').innerHTML = `<div class="d-meta"><span>${i + 1} / ${L.n}</span><span>Score ${score} / ${max}</span></div>
-          <div class="k-trigger"><small>Who is it?</small>Who ${esc(p.fact)}?</div>
+          <div class="k-trigger"><small>Who is it?</small>Who ${esc(p.fact.they)}?</div>
           <div class="ng-lineup">${lineup.map((x, j) => `<button class="ng-pick" type="button" data-j="${j}"><span class="n-face" style="background-image:url('${x.face}')"></span></button>`).join('')}</div>
           <div id="nName2"></div>`;
         $('mgBody').querySelectorAll('.ng-pick').forEach(b => b.onclick = () => {
@@ -4307,7 +4307,7 @@ function runNames(level){
     $('mgBody').innerHTML = `<div class="ng-stars">${'<i class="on">★</i>'.repeat(stars)}${'<i>★</i>'.repeat(3 - stars)}</div>
       <div class="mg-score"><b>${score}</b><span>/ ${max}</span></div>
       <div class="v-label"><b>Your new coworkers</b></div>
-      <div class="ng-team">${people.map(p => `<div class="ng-mate ${p.ok === 2 ? 'got' : p.ok ? 'half' : 'miss'}"><span class="n-face" style="background-image:url('${p.face}')"></span><b>${esc(p.name)}</b><small>${esc(p.fact)}</small></div>`).join('')}</div>
+      <div class="ng-team">${people.map(p => `<div class="ng-mate ${p.ok === 2 ? 'got' : p.ok ? 'half' : 'miss'}"><span class="n-face" style="background-image:url('${p.face}')"></span><b>${esc(p.name)}</b><small>${esc(p.fact.they)}</small></div>`).join('')}</div>
       <div class="k-lesson">Greeting people by name tells them they matter to you. It’s a small habit that builds trust fast.</div>
       <div class="mg-btns">${next ? `<button class="btn" id="ngNext" type="button">Level ${level + 2}: ${NG_LEVELS[level + 1].name} ▶</button>` : ''}<button class="btn ghost2" id="ngAgain" type="button">Replay level ${level + 1}</button><button class="btn ghost2" id="ngLevels" type="button">All levels</button></div>`;
     if (next) $('ngNext').onclick = () => runNames(level + 1);
