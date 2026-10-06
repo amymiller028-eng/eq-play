@@ -6,7 +6,7 @@
 <title>EQ XP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: navy brand bar → (intro hero | game: device/photo viewport + decision card) → fixed competency HUD. TalentSmartEQ palette. */
 :root{
@@ -432,10 +432,13 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 @media (max-width:860px){.meter{width:52px}.meter .ml span{display:none}.skring{width:44px;height:44px}.skring span{width:34px;height:34px;font-size:11px}}
 
 /* achievements + level up */
-.ach{position:fixed;top:92px;left:50%;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#1b2f5c,#0b1a36);border:2px solid #ffd34d;color:#fff;border-radius:16px;padding:10px 18px;box-shadow:0 14px 40px -10px rgba(0,0,0,.7),0 0 30px rgba(255,211,77,.3);animation:achIn .5s cubic-bezier(.2,1.4,.4,1),achOut .4s ease-in 3.4s forwards}
+.ach{position:fixed;top:92px;left:50%;transform:translateX(-50%);z-index:40;display:flex;align-items:flex-start;gap:14px;max-width:min(460px,92vw);cursor:pointer;background:linear-gradient(135deg,#1b2f5c,#0b1a36);border:2px solid #ffd34d;color:#fff;border-radius:16px;padding:10px 18px;box-shadow:0 14px 40px -10px rgba(0,0,0,.7),0 0 30px rgba(255,211,77,.3);animation:achIn .5s cubic-bezier(.2,1.4,.4,1),achOut .4s ease-in 6s forwards}
 .ach .tro{font-size:30px}
 .ach small{display:block;font:800 11px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffd34d}
 .ach b{font:600 17px var(--head)}
+.ach em{display:inline-block;font:700 11px var(--body);font-style:normal;letter-spacing:.06em;color:var(--mint);margin:2px 0 4px}
+.ach p{margin:0;font-size:13.5px;line-height:1.45;opacity:.92}
+.ach b{display:block}
 @keyframes achIn{from{transform:translate(-50%,-30px) scale(.8);opacity:0}}
 @keyframes achOut{to{transform:translate(-50%,-20px);opacity:0}}
 .lvlup{position:fixed;inset:0;display:grid;place-items:center;z-index:41;pointer-events:none}
@@ -470,7 +473,7 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 
 /* ===== side-panel layout ===== */
 :root{--panelw:clamp(340px,31vw,440px)}
-.dlg{left:auto;right:14px;top:86px;bottom:14px;transform:none;width:var(--panelw);display:flex;flex-direction:column}
+.dlg{left:auto;right:14px;top:calc(var(--hudh, 86px) + 6px);bottom:14px;transform:none;width:var(--panelw);display:flex;flex-direction:column}
 .dlg .speaker{position:static;flex-direction:row;align-items:center;gap:10px;padding:0 4px 10px}
 .dlg .speaker .face{width:56px;height:56px}
 .dlg .speaker b{font-size:14px}
@@ -478,7 +481,7 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 .opts,.places{grid-template-columns:minmax(0,1fr)}
 .fb{grid-template-columns:minmax(0,1fr)}
 .fb .btn{justify-self:start}
-#viewport{right:calc(var(--panelw) + 28px);bottom:0;top:86px;align-items:center}
+#viewport{right:calc(var(--panelw) + 28px);bottom:0;top:calc(var(--hudh, 86px) + 6px);align-items:center}
 #device,#map,#office{width:min(100%,calc((100vh - 116px) * 1.5))}
 @media (max-width:820px){
   .dlg{left:8px;right:8px;top:auto;bottom:8px;width:auto;height:48vh}
@@ -687,6 +690,31 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 .r-ach small{font-size:11.5px;opacity:.7;line-height:1.35}
 .r-ach.locked{border-color:rgba(255,255,255,.1);opacity:.5}
 .r-btns{display:flex;justify-content:center;gap:12px;margin-top:28px}
+.callback{display:inline-flex;align-items:center;gap:6px;font:700 12px var(--body);letter-spacing:.02em;color:#ffd34d;background:rgba(255,211,77,.12);border:1px solid rgba(255,211,77,.45);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.btn.ghost2{background:transparent;border:2px solid var(--mint);color:#fff;box-shadow:none}
+.btn.ghost2:hover{background:rgba(10,204,139,.15)}
+.r-btns{flex-wrap:wrap}
+.r-toughname{text-align:center;margin:10px 0 0;font-size:13px;opacity:.7}
+.r-replay{display:flex;flex-direction:column;gap:2px;background:rgba(255,211,77,.12);border:1.5px solid rgba(255,211,77,.5);border-radius:14px;padding:10px 14px;margin-bottom:18px;position:relative}
+.r-replay b{font:700 14px var(--head);color:#ffd34d}
+.r-replay span{font-size:14px}
+.soundbtn{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:var(--glass);color:#fff;display:grid;place-items:center;cursor:pointer;padding:0;flex:none}
+.soundbtn svg{width:20px;height:20px}
+.soundbtn[aria-pressed="false"]{color:rgba(255,255,255,.5)}
+.soundbtn:focus-visible{outline:3px solid #7fe7c4;outline-offset:2px}
+.hud .soundbtn{position:absolute;left:50%;top:12px;transform:translateX(-260px)}
+@media (max-width:860px){.hud .soundbtn{left:auto;right:12px;top:auto;bottom:-46px;transform:none}}
+.title-sound{position:absolute;top:18px;right:18px}
+.homebtn{position:fixed;left:14px;bottom:14px;z-index:35;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 12px;border-radius:999px;border:2px solid rgba(255,255,255,.22);background:var(--glass);color:#fff;font:700 13px var(--head);cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.homebtn svg{width:18px;height:18px}
+.homebtn:hover{border-color:var(--mint)}
+.homebtn:focus-visible{outline:3px solid #7fe7c4;outline-offset:2px}
+@media (max-width:820px){.homebtn span{display:none}.homebtn{padding:9px;bottom:auto;top:12px;left:auto;right:60px}}
+.leavemodal{position:fixed;inset:0;z-index:60;background:rgba(3,12,30,.7);display:grid;place-items:center;padding:20px}
+.leavebox{background:linear-gradient(180deg,#16305e,#0a1835);border:2px solid rgba(10,204,139,.5);border-radius:22px;padding:24px 26px;color:#fff;max-width:380px;width:100%;text-align:center;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)}
+.leavebox h2{font:800 22px var(--head);margin:0 0 6px}
+.leavebox p{margin:0 0 18px;opacity:.85}
+.leavebtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .linkbtn{background:none;border:0;color:rgba(255,255,255,.7);font:600 13px var(--body);text-decoration:underline;cursor:pointer}
 /* friendship meter (lunch) */
 .friend{margin-top:5px;min-width:220px}
@@ -709,6 +737,150 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 .fbar .mark.start em{color:var(--muted)}
 .fends{display:flex;justify-content:space-between;font:600 12px var(--body);color:var(--muted);margin-top:6px}
 .frnote{background:var(--bg);border-radius:12px;padding:10px 14px;font-size:14px;margin-top:10px}
+
+/* ================= GAME UI v2 ================= */
+/* hard edges, slanted plates, heavy italic display type, hex gauges, colour per skill */
+:root{--sk-sa:#0acc8b;--sk-sm:#38b6ff;--sk-soa:#ffc93d;--sk-rm:#ff6f91;--panel:linear-gradient(180deg,rgba(22,52,112,.97),rgba(8,22,54,.97));--hex:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);--slant:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.sk-sa{--c:var(--sk-sa)}.sk-sm{--c:var(--sk-sm)}.sk-soa{--c:var(--sk-soa)}.sk-rm{--c:var(--sk-rm)}
+body::after{background:radial-gradient(ellipse at 50% 40%,rgba(0,30,70,.5),rgba(3,10,26,.93)),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 26px)}
+
+/* display type */
+.title .logo{font-weight:900;font-style:italic;letter-spacing:-4px;text-shadow:8px 8px 0 rgba(0,0,0,.35),0 0 50px rgba(10,204,139,.35)}
+.scr-h,.mb-title,.dayfull h2{font-family:var(--head);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;text-shadow:5px 5px 0 rgba(0,0,0,.35)}
+.r-rank{font-weight:900;font-style:italic;text-transform:uppercase}
+
+/* slanted label plates */
+.plate,.scr-k,.r-kick,.dayfull-k,.r-label{display:inline-block;width:auto;background:var(--mint);color:#04261a;padding:4px 16px;clip-path:var(--slant);font:900 italic 12px var(--head);letter-spacing:.16em;text-transform:uppercase}
+.plate.gold,.r-label{background:#ffd34d;color:#3a2a00}
+.r-next .r-label{background:var(--mint);color:#04261a}
+.dayfull-k{font-size:14px;padding:5px 20px}
+.comp-chip{font:900 italic 12px var(--head);letter-spacing:.14em;text-transform:uppercase}
+.comp-chip i{border-radius:0;width:10px;height:10px;clip-path:var(--hex);box-shadow:none}
+.title .skills4 span{border-radius:0;border:0;clip-path:var(--slant);background:rgba(255,255,255,.12);font:800 italic 13px var(--head);text-transform:uppercase;letter-spacing:.06em;padding:7px 18px}
+.title .skills4 span:nth-child(1){box-shadow:inset 0 -3px 0 var(--sk-sa)}.title .skills4 span:nth-child(2){box-shadow:inset 0 -3px 0 var(--sk-sm)}
+.title .skills4 span:nth-child(3){box-shadow:inset 0 -3px 0 var(--sk-soa)}.title .skills4 span:nth-child(4){box-shadow:inset 0 -3px 0 var(--sk-rm)}
+
+/* buttons: chunky parallelograms */
+.btn{border-radius:0;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);background:linear-gradient(180deg,#45f2b8,#0acc8b 55%,#08a571);color:#03281b;font:900 italic 17px var(--head);text-transform:uppercase;letter-spacing:.05em;padding:12px 36px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.22),inset 0 2px 0 rgba(255,255,255,.5)}
+.btn:hover{background:linear-gradient(180deg,#7af8cf,#1ddc9e 55%,#08a571)}
+.btn:active{transform:translateY(2px);box-shadow:inset 0 -2px 0 rgba(0,0,0,.22)}
+.btn:focus-visible{outline:0;background:linear-gradient(180deg,#fff,#d6fff0);color:#002d61}
+.btn.big{font-size:24px;padding:16px 64px;clip-path:polygon(18px 0,100% 0,calc(100% - 18px) 100%,0 100%);box-shadow:inset 0 -7px 0 rgba(0,0,0,.22),inset 0 2px 0 rgba(255,255,255,.5)}
+.btn.big:active{transform:translateY(3px);box-shadow:inset 0 -3px 0 rgba(0,0,0,.22)}
+#startBtn{font-size:22px;padding:15px 52px;border-radius:0;box-shadow:inset 0 -7px 0 rgba(0,0,0,.22),inset 0 2px 0 rgba(255,255,255,.5)}
+.btn.ghost,.btn.ghost2{background:linear-gradient(180deg,#24478f,#16306a);color:#9ff5d6;border:0;box-shadow:inset 0 -4px 0 rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.15)}
+.btn.ghost:hover,.btn.ghost2:hover{background:linear-gradient(180deg,#2d56a8,#1b3a7c)}
+.linkbtn{font:700 italic 13px var(--head);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;border-bottom:2px solid rgba(255,255,255,.25);padding:2px 0}
+.linkbtn:hover{color:#fff;border-color:var(--mint)}
+
+/* panels: hard shadow + corner brackets */
+.frame,.scen,.r-wrap,.leavebox,.avgridwrap{position:relative;border-radius:6px;background:var(--panel);border:2px solid rgba(255,255,255,.1);box-shadow:10px 10px 0 rgba(0,0,0,.35)}
+.frame::before,.frame::after,.scen::before,.scen::after,.r-wrap::before,.r-wrap::after,.leavebox::before,.leavebox::after,.avgridwrap::before,.avgridwrap::after{content:"";position:absolute;width:22px;height:22px;pointer-events:none;border:3px solid var(--mint);z-index:2}
+.frame::before,.scen::before,.r-wrap::before,.leavebox::before,.avgridwrap::before{top:6px;left:6px;border-right:0;border-bottom:0}
+.frame::after,.scen::after,.r-wrap::after,.leavebox::after,.avgridwrap::after{bottom:6px;right:6px;border-left:0;border-top:0}
+.scen{padding:28px 24px}
+.scen:hover{transform:translateY(-6px);box-shadow:10px 16px 0 rgba(0,0,0,.35);border-color:var(--mint)}
+.scen b{font:900 italic 24px var(--head);text-transform:uppercase}
+.r-wrap{background:linear-gradient(180deg,#16346f,#081a3c 70%);border-color:rgba(10,204,139,.4)}
+.nameplate{border:0;border-radius:0;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);background:#0b1d44;box-shadow:inset 0 -3px 0 var(--mint);padding:6px 20px 6px 26px}
+.nameplate:focus-within{background:#13306a}
+.nameplate input{font:900 italic 19px var(--head);text-transform:uppercase}
+
+/* mission briefing */
+#briefScreen{padding-top:36px}
+.mb{display:grid;grid-template-columns:minmax(0,360px) minmax(0,640px);gap:40px;align-items:center;max-width:1080px;width:100%;text-align:left}
+.mb-left{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.mb-portrait{position:relative;width:190px;height:190px;display:grid;place-items:center;margin:4px 0}
+.mb-portrait::before{content:"";position:absolute;inset:0;clip-path:var(--hex);background:linear-gradient(150deg,var(--mint),#38b6ff)}
+.mb-portrait::after{content:"";position:absolute;inset:-14px;clip-path:var(--hex);background:rgba(10,204,139,.14);z-index:-1}
+.mb-portrait .face{position:relative;width:176px;height:176px;border:0;border-radius:0;clip-path:var(--hex)}
+.mb-title{font-size:clamp(34px,4.2vw,54px);margin:0}
+.mb .brief-line{max-width:32ch;text-align:left}
+.mb-panel{padding:22px 22px 24px}
+.mb-h{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
+.mb-h small{font:900 italic 14px var(--head);color:#ffd34d;letter-spacing:.06em}
+.mb .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:none;margin:0 0 22px}
+.mb .tile{width:auto;text-align:left;cursor:default;border-radius:4px;border:0;border-left:5px solid var(--c);background:rgba(255,255,255,.05);padding:10px 14px 12px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:baseline}
+.mb .tile i{font:900 italic 22px/1 var(--head);color:var(--c);grid-row:span 2}
+.mb .tile b{font:800 15px var(--head);color:#fff;margin:0}
+.mb .tile span{font:500 12.5px/1.4 var(--body);opacity:.8;grid-column:2}
+.mb .achrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:none}
+.mb .achitem{flex-direction:column;align-items:center;text-align:center;gap:4px;background:rgba(255,255,255,.04);border:0;border-radius:4px;padding:12px 8px}
+.mb .achitem .badge{width:44px;height:48px;margin-bottom:2px;background:linear-gradient(160deg,#ffe58a,#ffc93d 45%,#b9860e);filter:saturate(.35) brightness(.75)}
+.mb .achitem .badge::before{background:linear-gradient(160deg,#1d3a75,#0b1d44)}
+.mb .achitem .badge svg{stroke:#ffd34d}
+.mb .achitem b{font:800 13px var(--head)}
+.mb .achitem span{font:500 11.5px/1.35 var(--body);opacity:.7}
+.mb .achitem:hover .badge{filter:none}
+@media (max-width:920px){.mb{grid-template-columns:minmax(0,1fr);text-align:center}.mb-left{align-items:center}.mb .brief-line{text-align:center}}
+@media (max-width:560px){.mb .tiles{grid-template-columns:minmax(0,1fr)}.mb .achrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* HUD */
+.hud{background:linear-gradient(rgba(3,10,26,.92),rgba(3,10,26,0))}
+.hud-me{border:0;border-radius:0;clip-path:polygon(0 0,100% 0,calc(100% - 26px) 100%,0 100%);background:linear-gradient(90deg,#0b1d44,#16346f);padding:7px 46px 7px 8px;box-shadow:inset 0 -3px 0 var(--mint)}
+.hud-me b{font:900 italic 17px var(--head);text-transform:uppercase;letter-spacing:.03em}
+.xpbar{position:relative;width:160px;height:12px;border-radius:0;clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%);background:rgba(255,255,255,.14)}
+.xpbar::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(8,22,54,.75) 14px 16px)}
+.xpbar i{border-radius:0}
+.lvl small{font:800 italic 12px var(--head);color:#ffd34d;opacity:1}
+#hudPlace{display:none}
+.hud-where{border:0;border-radius:0;clip-path:var(--slant);background:#0b1d44;padding:9px 30px;box-shadow:inset 0 -3px 0 #ffd34d}
+.hud-where span{font:800 italic 14px var(--head);text-transform:uppercase;letter-spacing:.06em;opacity:1}
+.hud-where span b{font:900 italic 14px var(--head);color:#ffd34d}
+.friend .fl{font:800 italic 11px var(--head)}
+
+/* skill gauges: hexes, one colour per skill */
+.meter{width:84px}
+.skring{width:56px;height:62px;border-radius:0;clip-path:var(--hex);background:conic-gradient(var(--c,var(--mint)) calc(var(--p)*1%),rgba(255,255,255,.14) 0);box-shadow:none}
+.skring span{width:44px;height:49px;border-radius:0;clip-path:var(--hex);background:#0b1d44;font:900 italic 16px var(--head)}
+.meter.full .skring{background:var(--c,var(--mint))}
+.meter.pulse .skring{animation:none}
+.meter.pulse{animation:hexpulse 1.2s ease-out}
+@keyframes hexpulse{30%{filter:drop-shadow(0 0 12px var(--c,var(--mint))) brightness(1.3)}}
+.meter .ml{font:800 italic 10px var(--head);text-transform:uppercase;letter-spacing:.04em;margin-top:3px}
+.meter .ml b{color:var(--c,var(--mint));font:900 italic 12px var(--head)}
+@media (max-width:860px){.meter{width:50px}.skring{width:44px;height:49px}.skring span{width:34px;height:38px;font-size:12px}}
+.r-ring{width:100px;height:112px;border-radius:0;clip-path:var(--hex);background:conic-gradient(var(--c,var(--mint)) calc(var(--p)*1%),rgba(255,255,255,.12) 0)}
+.r-ring span{width:80px;height:90px;border-radius:0;clip-path:var(--hex);background:#0b1d44;font:900 italic 26px var(--head)}
+.r-skill b{font:800 italic 13px var(--head);text-transform:uppercase;letter-spacing:.03em}
+.r-skill.full .r-ring{box-shadow:none;background:var(--c,var(--mint))}
+.r-skill.full{filter:drop-shadow(0 0 14px var(--c,var(--mint)))}
+
+/* dialogue panel */
+.dlg .speaker b{border-radius:0;clip-path:var(--slant);padding:3px 18px;font:900 italic 14px var(--head);text-transform:uppercase;letter-spacing:.05em}
+.card{border-radius:6px;background:var(--panel);border:2px solid rgba(255,255,255,.1);border-top:4px solid var(--mint);box-shadow:10px 10px 0 rgba(0,0,0,.35)}
+.card h2{font-weight:800}
+.opt,.place,.skillbtn,.chip{border-radius:4px}
+.opt{border:2px solid rgba(255,255,255,.08);border-left:4px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);padding:9px 12px}
+.opt .k{border-radius:0;width:26px;clip-path:var(--slant);font:900 italic 12px var(--head)}
+.opt:hover:not(:disabled){transform:translateX(4px);border-color:rgba(255,255,255,.12);border-left-color:var(--mint);background:rgba(10,204,139,.12)}
+.opt.picked{border-left-color:var(--mint)}
+.place{border-left:4px solid rgba(255,255,255,.22)}
+.place:hover:not(:disabled),.place.go{border-left-color:var(--mint)}
+.map,.photo,.device{border-radius:8px;box-shadow:12px 12px 0 rgba(0,0,0,.35),0 0 0 3px rgba(255,255,255,.08)}
+.ptag{border-radius:0;clip-path:var(--slant);font:800 italic 12px var(--head);text-transform:uppercase;padding:5px 18px}
+.tok .nm{font:800 italic 11px var(--head);text-transform:uppercase;border-radius:0;clip-path:var(--slant);padding:1px 10px}
+
+/* splash, popups, small buttons */
+.dayfull{background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 3px,transparent 3px 30px),linear-gradient(160deg,rgba(0,45,97,.97),rgba(8,22,54,.98))}
+.dayfull h2{font-size:clamp(36px,7vw,64px)}
+.ach{border-radius:6px;box-shadow:8px 8px 0 rgba(0,0,0,.35),0 0 30px rgba(255,211,77,.3)}
+.ach b{font-weight:900;font-style:italic;text-transform:uppercase}
+.homebtn,.soundbtn{border-radius:6px}
+.homebtn{font:800 italic 13px var(--head);text-transform:uppercase;letter-spacing:.05em}
+.leavebox h2{font:900 italic 24px var(--head);text-transform:uppercase}
+.r-next,.r-perfect,.r-replay,.r-ach{border-radius:6px}
+.avthumb{border-radius:0;clip-path:var(--hex);border:0}
+.avthumb.on{box-shadow:none;outline:0;filter:drop-shadow(0 0 0 #fff)}
+.avthumb.on{background-color:var(--mint);padding:0;transform:scale(1.08);opacity:1}
+.avgrid-h{font:800 italic 12px var(--head);color:var(--mint)}
+
+.hud-where span b::after{content:" \00b7";color:#ffd34d}
+.dlg .card{flex:0 1 auto}
+.spot{border-radius:0;clip-path:var(--slant);background:var(--mint);color:#03281b;font:900 italic 13px var(--head);text-transform:uppercase;letter-spacing:.04em;padding:8px 20px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.22)}
+.spot:hover{background:#45f2b8}
+.spot.done{background:#8d99a8;color:#fff}
+@media (max-width:600px){.hud{grid-template-columns:minmax(0,1fr);gap:8px}.hud-me{justify-self:start;padding-right:34px}.hud-me .face{width:44px;height:44px}.xpbar{width:100px}.hud-in{justify-self:stretch;justify-content:space-around}.meter{width:64px}.hud-me{max-width:calc(100% - 100px)}.xpbar{width:72px}.hud .soundbtn{top:12px;bottom:auto;right:12px}.homebtn{right:58px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -723,6 +895,7 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 
 <!-- TITLE -->
 <section class="title" id="titleScreen">
+  <button class="soundbtn title-sound" type="button" aria-label="Sound"></button>
   <div>
     <div class="logo">EQ <span>XP</span></div>
     <p class="tag">Level up your emotional intelligence, one conversation at a time.</p>
@@ -771,13 +944,22 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 
 <!-- BRIEFING -->
 <section class="gscreen" id="briefScreen" hidden>
-  <span class="face brief-face" id="briefFace" data-face="dana"></span>
-  <h1 class="scr-h" id="briefTitle">The Board Deck</h1>
-  <p class="brief-line" id="briefLine"></p>
-  <div class="tiles" id="skillTiles"></div>
-  <div class="achrow" id="achGrid"></div>
-  <button class="btn big" id="startBtn" type="button">Start</button>
-  <button class="linkbtn" id="backScen" type="button">Pick a different scenario</button>
+  <div class="mb">
+    <div class="mb-left">
+      <div class="plate">Mission briefing</div>
+      <div class="mb-portrait"><span class="face brief-face" id="briefFace" data-face="dana"></span></div>
+      <h1 class="mb-title" id="briefTitle">An Unexpected Deadline</h1>
+      <p class="brief-line" id="briefLine"></p>
+      <button class="btn big" id="startBtn" type="button">Start mission</button>
+      <button class="linkbtn" id="backScen" type="button">Pick a different scenario</button>
+    </div>
+    <div class="mb-panel frame">
+      <div class="mb-h"><span class="plate">Skills in play</span></div>
+      <div class="tiles" id="skillTiles"></div>
+      <div class="mb-h"><span class="plate gold">Achievements</span><small id="achCount"></small></div>
+      <div class="achrow" id="achGrid"></div>
+    </div>
+  </div>
 </section>
 
 <div class="dayfull" id="dayCard" hidden role="dialog" aria-modal="true" aria-labelledby="dayTitle">
@@ -858,6 +1040,7 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
 </main>
 
 <div class="hud" id="hud" hidden>
+  <button class="soundbtn" type="button" aria-label="Sound"></button>
   <div class="hud-me"><span class="face" data-face="sam"></span><div><b id="hudName">Sam</b>
     <div class="lvl"><div class="xpbar"><i id="xpFill"></i></div><small id="xpTxt">0 XP</small></div></div></div>
   <div class="hud-where"><b id="hudPlace">Your desk</b><span id="hudTime"></span>
@@ -865,6 +1048,11 @@ body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse
   <div class="hud-in" id="hudIn"></div>
 </div>
 <div class="results" id="results" hidden></div>
+<button class="homebtn" id="homeBtn" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></button>
+<div class="leavemodal" id="leaveModal" hidden role="dialog" aria-modal="true" aria-labelledby="leaveTitle">
+  <div class="leavebox"><h2 id="leaveTitle">Leave this game?</h2><p>Your progress in this run won’t be saved.</p>
+    <div class="leavebtns"><button class="btn ghost2" id="leaveStay" type="button">Keep playing</button><button class="btn" id="leaveGo" type="button">Leave</button></div></div>
+</div>
 
 <script>
 /* ---------- assets ---------- */
@@ -1208,13 +1396,13 @@ const STEPS_BOARD = [
    type:'choice', options:[
     {x:'I care about this work, and I don\'t want it to look like I dropped the ball.', p:3, concept:'Finding the source',
      fb:'You found what the feeling is protecting: your reputation and your standards. Once you can name that, you can choose what to do with it.'},
-    {x:'The timeline changed and nobody told me.', p:2, concept:'Naming the trigger',
+    {x:'The timeline changed and nobody told me, so now I\'m the one scrambling.', p:2, concept:'Naming the trigger',
      fb:'You named the trigger, a surprise change. The next layer is why a surprise like this matters so much to you.'},
     {x:'Honestly, it\'s not hitting hard. Pings like this don\'t faze me.', p:2, concept:'Knowing your threshold',
      fb:'Knowing your threshold is self-awareness too. Keep in mind that teammates, and Dana herself, may be wired very differently.'},
     {x:'I\'m not sure why, but a string of pings in a row really gets under my skin.', p:2, concept:'Noticing a pattern',
      fb:'You don\'t need the "why" yet. Noticing that a specific situation reliably sets you off is the first step to managing it.'},
-    {x:'Dana is being unreasonable.', p:1, concept:'Thoughts vs. feelings',
+    {x:'Dana is being unreasonable, and she always does this when she\'s stressed.', p:1, concept:'Thoughts vs. feelings',
      fb:'That\'s a thought about Dana, and it may be partly true. Ask yourself what that thought is doing to you right now: is it fueling frustration or defensiveness?'}
   ]},
 
@@ -1228,7 +1416,7 @@ const STEPS_BOARD = [
      fb:'Protecting your focus is real self-management. The cost: Dana is left guessing, and silence often brings more messages. A one-line heads-up would keep your focus and calm her down.'},
     {x:'Take three slow breaths, check where the project really stands, then reply.', p:3, fx:'breathe', concept:'Pause before responding',
      fb:'A short pause lets your thinking catch up with your feelings. Now you have the facts: about 60% done, still waiting on finance\'s numbers for two vendors.'},
-    {x:'Call Dana instead of typing.', p:2, fx:'call', concept:'Changing the channel',
+    {x:'Call Dana instead of typing, so you can sort it out in real time.', p:2, fx:'call', concept:'Changing the channel',
      fb:'Switching to voice can slow down a fast thread and add tone that text lacks. It works best when you\'re calm enough to talk and she\'s free to pick up.'}
   ]},
 
@@ -1236,13 +1424,14 @@ const STEPS_BOARD = [
    title:'Write your reply to Dana.',
    prompt:'Which message do you send?',
    type:'choice', reply:true, options:[
-    {x:'Got it!! On it now!!! Will send ASAP!!!', p:1, concept:'Emotional contagion',
+    {x:'Got it!! On it now!!! Will send ASAP!!! Sorry, I know this one is a big deal!!', p:1, set:'vague', concept:'Emotional contagion',
      dana:'ok, but what does ASAP mean? Can you come by at 9:15 tomorrow? Let\'s figure this out in person.',
      fb:'This reassures her that you\'re on it, and the energy matches hers. It still leaves out a status and a time, so she has to ask again.'},
-    {x:'Hi Dana, I\'m about 60% through and the analysis is solid. I\'m still waiting on finance\'s numbers for two vendors. I can send a draft by 9 AM with those gaps flagged. Could we take 15 minutes tomorrow to align on what the board needs?', p:3, ach:'signal', concept:'Responding, not reacting',
+    {x:'Hi Dana, thanks for the heads-up. I\'ll keep working on it tonight and send over whatever I have as soon as I can.', p:2, concept:'Calm but vague', dana:'Thanks. What time should I expect it? Let\'s talk in person. My office, 9:15 tomorrow.', fb:'Calm and polite, which keeps the temperature down. It still leaves out where things stand and when she\'ll hear back, so Dana has to ask again.'},
+    {x:'Hi Dana, I\'m 60% done and waiting on finance for two vendors. Draft by 9 AM with gaps flagged. 15 minutes tomorrow?', p:3, ach:'signal', concept:'Responding, not reacting',
      dana:'Thank you, that\'s really helpful. Come by my office at 9:15 tomorrow.',
      fb:'One calm message with your status, the blocker, a realistic time, and a next step. This is what managing your stress looks like from the other side.'},
-    {x:'This is the first I\'m hearing about Thursday.', p:1, concept:'Honesty and timing',
+    {x:'This is the first I\'m hearing about Thursday. Nobody told me the board date moved.', p:1, set:'defensive', concept:'Honesty and timing',
      dana:'It came up in exec this afternoon. Let\'s talk in person. My office, 9:15 tomorrow.',
      fb:'It\'s honest, and with a manager you have a lot of trust with, it might land fine. Over chat, mid-stress, it can read as defensive. The same point made face to face often goes better.'}
   ]},
@@ -1259,14 +1448,18 @@ const STEPS_BOARD = [
    prompt:'Take in the scene before you answer.',
    subs:{who:'scene', x:'Dana gives you a quick, tight smile. Her hand stays on her laptop, and her eyes keep flicking back to the screen. "One sec…"'},
    cues:[{t:'Tight smile', x:'44%', y:'26%'},{t:'Eyes keep going back to her screen', x:'8%', y:'14%'}],
+   subsIf:[
+     {when:S => S.replyP === 3, why:'you sent Dana a clear update last night', subs:{who:'scene', x:'Dana looks up: "Thanks for the clear update last night. It really helped." Then her eyes drift back to her screen. "One sec…"'}},
+     {when:S => S.flags.defensive, why:'your reply to Dana last night came out defensive', subs:{who:'scene', x:'Dana\'s "Morning" is clipped, and she doesn\'t mention last night. Her hand stays on her laptop, eyes on the screen.'}},
+     {when:S => S.flags.vague, why:'your reply to Dana last night didn\'t say where things stood', subs:{who:'scene', x:'"So… did the finance numbers come in?" Dana asks before you even sit down. Her eyes go right back to her screen.'}}],
    lateOption:{x:'She\'s staring at her screen and won\'t meet my eyes. She might be frustrated that I\'m late.', p:3, concept:'Reading your impact',
      fb:'You connected her body language to your own impact. The next step is owning it: "Sorry I\'m late. That wasn\'t fair to you this morning."'},
    type:'choice', options:[
-    {x:'Her attention is on her screen and she seems stretched thin. Something else might be weighing on her.', p:3, concept:'Reading cues',
+    {x:'Her attention keeps going to her screen. She seems stretched thin, like something else is weighing on her.', p:3, concept:'Reading cues',
      fb:'You noticed the cues and stayed open about what they mean. That\'s the heart of social awareness.'},
     {x:'She\'s not looking at me. She might still be annoyed about last night.', p:2, concept:'Cue vs. story',
      fb:'You caught the cue, which is the hard part. The story you attached is one possibility. Hold it loosely until you know more.'},
-    {x:'She\'s busy. I\'ll just get started.', p:1, concept:'Reading cues',
+    {x:'She\'s busy. I\'ll just get started so I don\'t take up more of her time.', p:1, concept:'Reading cues',
      fb:'You noticed she\'s busy and you\'re respecting her time. Checking what "busy" means today would tell you how to pitch it.'}
   ]},
 
@@ -1275,16 +1468,16 @@ const STEPS_BOARD = [
    prompt:'She finally looks up.',
    subs:{who:'dana', x:'"Okay… sorry. Go ahead whenever you\'re ready."'},
    type:'choice', options:[
-    {x:'"Before I start, you look like you\'ve had a long morning. Is now still a good time, or is something else going on with the board?"', p:3, ach:'read', photo:'talk', concept:'Naming what you see',
+    {x:'"You look like you\'ve had a long morning. Is now still good, or is something going on with the board?"', p:3, ach:'read', photo:'talk', concept:'Naming what you see',
      say:'"…Honestly? Thanks for asking. The CEO wants to cut two vendors, and he\'s using your analysis to decide. I\'ve been up since five."',
      fb:'You named what you saw, kindly, and gave her room to answer. Now you know what really matters to her this week.'},
-    {x:'"Is this a bad time? You seem kind of out of it."', p:2, photo:'listen', concept:'Relationship bank',
+    {x:'"Is this a bad time? You seem kind of out of it. We can always push this if you need."', p:2, photo:'listen', concept:'Relationship bank',
      say:'(A small laugh.) "Is it that obvious? Rough morning. The CEO\'s been all over this."',
      fb:'It\'s an honest observation. If you have plenty of trust built up with Dana, it lands fine. With less in the relationship bank, "out of it" can sound like criticism. Describing what you see is the safer bet.'},
     {x:'Keep it short. Cover the essentials in three minutes so you don\'t take up her time.', p:2, photo:'serious', concept:'Adapting',
      say:'"Wait, go back. Which two vendors are the weakest?"',
      fb:'You read that she was stretched and adapted, which is social awareness in action. A quick question would have told you exactly what she needed.'},
-    {x:'Open your laptop and start with slide 1.', p:1, photo:'laptop', concept:'Reading cues',
+    {x:'Open your laptop and start with slide 1, walking her through the analysis from the top.', p:1, photo:'laptop', concept:'Reading cues',
      say:'"Mm-hm." (Her eyes drift back to her screen.)',
      fb:'You came prepared, and some managers want exactly that. Today, though, half of it may not land, because she isn\'t fully in the room yet.'}
   ]},
@@ -1295,16 +1488,16 @@ const STEPS_BOARD = [
    prompt:'You know tonight isn\'t realistic without risking errors in front of the board.',
    subs:{who:'dana', x:'"Can you get me the full analysis, finance numbers included, by tonight?"'},
    type:'choice', options:[
-    {x:'"I can\'t promise the full version tonight without risking errors in front of the board. I can fully finish the two vendors the CEO is focused on by 5 PM, and everything else by 7 AM Thursday. Would that work?"', p:3, ach:'hard', photo:'listen', concept:'Holding a hard line kindly',
+    {x:'"Not all of it tonight. I can finish the CEO\'s two vendors by 5 and the rest by 7 AM Thursday. Would that work?"', p:3, ach:'hard', photo:'listen', concept:'Holding a hard line kindly',
      say:'"Yes. That\'s exactly what I need. Thank you."',
      fb:'This is a hard conversation done well: honest about the limit, focused on her real goal, and ending with a concrete offer.'},
-    {x:'"Let me check with finance and get back to you by noon with what\'s realistic."', p:2, photo:'talk', concept:'Buying time',
+    {x:'"Let me check with finance and get back to you by noon with what\'s realistic. I don\'t want to overpromise."', p:2, photo:'talk', concept:'Buying time',
      say:'"Okay. Noon. I need to know by then."',
      fb:'Buying time to get real information is smart. Offering even a partial plan now would ease her stress sooner.'},
-    {x:'"Of course, no problem." (You\'ll pull an all-nighter.)', p:1, photo:'smile', concept:'Short-term vs. long-term trust',
+    {x:'"Of course, no problem. I\'ll get it all done tonight." (You\'ll be up until 2 AM.)', p:1, photo:'smile', concept:'Short-term vs. long-term trust',
      say:'"Amazing. Thank you."',
      fb:'It protects the moment, and sometimes going the extra mile is the right call. Done often, it costs you: burnout, rushed errors, and a manager who can\'t tell when you\'re at capacity.'},
-    {x:'"That\'s not possible."', p:1, photo:'serious', concept:'Clarity plus a path',
+    {x:'"That\'s not possible. Finance still hasn\'t sent their numbers, and I can\'t make them up."', p:1, photo:'serious', concept:'Clarity plus a path',
      say:'"…Okay. So what is possible?"',
      fb:'It\'s clear and honest, which some managers appreciate. Without an alternative, though, the problem lands back on her.'}
   ]},
@@ -1313,17 +1506,18 @@ const STEPS_BOARD = [
    title:'Before you leave…',
    prompt:'Last night\'s pile of messages is still on your mind. How do you close?',
    subs:{who:'dana', x:'"Anything else before you go?"'},
+   subsIf:[{when:S => (S.rel.priya || 0) < 0, why:'you were short with Priya in the hallway', subs:{who:'dana', x:'"Anything else? …Also, Priya mentioned you were pretty short with her in the hallway. Everything okay?"'}}],
    type:'choice', options:[
-    {x:'"One thing that would help me: when a timeline changes, could you send it in one message with the new date? I\'ll get back to you faster when I know what changed."', p:3, ach:'ask', photo:'smile', concept:'Making a request',
+    {x:'"One request: when a timeline changes, could you send it in one message with the new date? I\'ll respond faster."', p:3, ach:'ask', photo:'smile', concept:'Making a request',
      say:'"That\'s fair. Last night was a lot. I\'ll do that."',
      fb:'You raised a real issue as a request about the future, not a complaint about the past. That builds trust both ways.'},
     {x:'"Thanks for telling me about the CEO piece. Want me to send you a status update at 3 so you\'re not wondering?"', p:2, photo:'smile', concept:'Anticipating needs',
      say:'"Yes, please. That would really help."',
      fb:'Proactive and generous. It eases her stress today, though the pattern of message pile-ups is still unspoken.'},
-    {x:'"Last night was really stressful for me."', p:2, photo:'talk', concept:'Naming impact',
+    {x:'"Last night was really stressful for me. Five messages in a row really threw me off."', p:2, photo:'talk', concept:'Naming impact',
      say:'"…Yeah. I\'m sorry. I was panicking a bit."',
      fb:'Naming the impact honestly takes courage, and Dana heard it. Pairing it with a request makes it easier for her to change something.'},
-    {x:'Say nothing about it. Keep the peace.', p:1, photo:'listen', concept:'Choosing your moment',
+    {x:'Say nothing about it. Keep the peace and head back to your desk to get started.', p:1, photo:'listen', concept:'Choosing your moment',
      say:'"Great. Talk later."',
      fb:'Sometimes it\'s not the moment, and that\'s a valid call. If the pattern repeats, plan when you\'ll bring it up.'}
   ]},
@@ -1337,13 +1531,13 @@ const VISITS = {
     line:'Hey, come in. You look like you\'ve got something on your mind.',
     title:'What do you bring to Gloria?', prompt:'You have about ten minutes before your 9:15 with Dana.',
     options:[
-      {x:'"Can I run my plan by you? I\'ll lead with what\'s done, name the finance gap, and offer a scoped version for Thursday."', p:3, rel:2, ach:'perspective', concept:'Testing your plan',
+      {x:'"Can I run my plan by you? Lead with what\'s done, name the finance gap, offer a scoped version."', p:3, rel:2, ach:'perspective', concept:'Testing your plan',
        reply:'That\'s a strong plan. One add: ask Dana what\'s driving the deadline. There\'s usually pressure from above that you can\'t see.',
        fb:'You came in with a plan and asked for a gut check. That\'s self-management: calm enough to think, open enough to adjust.'},
-      {x:'"How do I deal with Dana when she gets like this?"', p:2, rel:1, ach:'perspective', concept:'Seeking perspective',
+      {x:'"How do I deal with Dana when she gets like this? I never know what she actually wants."', p:2, rel:1, ach:'perspective', concept:'Seeking perspective',
        reply:'When Dana gets clipped, it\'s usually pressure from above. Get curious about what\'s driving it before you defend your timeline.',
        fb:'Asking for perspective is smart. Gloria\'s insight about pressure from above may change how you read Dana at 9:15.'},
-      {x:'"Honestly? I just need to vent about last night."', p:1, rel:1, ach:'perspective', concept:'Venting vs. processing',
+      {x:'"Honestly? I just need to vent about last night. Five messages in four minutes!"', p:1, rel:1, ach:'perspective', concept:'Venting vs. processing',
        reply:'Fair, get it out. (Five minutes later.) Feel better? Now, what do you actually need from Dana today?',
        fb:'Venting is fine, but it only goes so far: it releases some pressure, then replays the frustration without changing anything. The real value came when Gloria turned it toward a plan.'}
     ]},
@@ -1354,10 +1548,10 @@ const VISITS = {
       {x:'"Honestly, more rattled than I expected. I think I\'m nervous about this 9:15."', p:3, rel:2, ach:'real', concept:'Naming it out loud',
        reply:'Totally fair. You\'ve got this, though. Want me to check in with you after?',
        fb:'Saying the feeling out loud to someone you trust makes it smaller and clearer. You walk away steadier.'},
-      {x:'"She\'s impossible. Total micromanager."', p:1, rel:1, concept:'Co-rumination',
+      {x:'"She\'s impossible. Total micromanager. Five messages in four minutes, can you believe it?"', p:1, rel:1, concept:'Co-rumination',
        reply:'Ugh, right?? Remember when she… (Ten minutes later you\'re more wound up than when you walked in.)',
        fb:'Venting with a friend is normal, but it only goes so far, and when you both pile on it usually amplifies the feeling instead of easing it. Notice how you feel walking out: calmer, or more fired up?'},
-      {x:'"Ha, all good. Coffee after?"', p:2, rel:1, concept:'Knowing your state',
+      {x:'"Ha, all good, it\'s just Dana being Dana. Coffee after my 9:15?"', p:2, rel:1, concept:'Knowing your state',
        reply:'Deal. Good luck in there.',
        fb:'If you really are fine, that\'s useful self-knowledge. If you\'re brushing it off, a quick honest check with yourself before 9:15 is worth it.'}
     ]}
@@ -1382,9 +1576,9 @@ const INTERRUPT = [
    options:[
     {x:'She seems stressed too. Someone may be pushing her on this pitch.', p:3, concept:'Reading cues',
      fb:'You noticed her urgency and wondered what\'s behind it. That\'s social awareness under time pressure, which is when it\'s hardest.'},
-    {x:'She clearly wants something from me.', p:2, concept:'Reading cues',
+    {x:'She clearly wants something from me, and she isn\'t going to let me leave without it.', p:2, concept:'Reading cues',
      fb:'True, and noticing it is a start. Look one layer deeper: her fast talking and glances at her manager\'s office suggest she\'s under pressure too.'},
-    {x:'She has no idea how busy I am.', p:1, concept:'Cue vs. story',
+    {x:'She has no idea how busy I am, or she wouldn\'t be asking right now.', p:1, concept:'Cue vs. story',
      fb:'You caught her urgency, then filtered it through your own stress. She probably doesn\'t know about your 9:15. That\'s missing information, not carelessness.'}
    ]},
   {comp:'sm', who:'priya', type:'choice', exit:true,
@@ -1392,19 +1586,19 @@ const INTERRUPT = [
    title:'How do you handle it?',
    prompt:'Your answer affects your self-management and your relationship with Priya.',
    options:[
-    {x:'"I want to help, and I\'m due in Dana\'s office in three minutes. Can I find you at 10:00? I\'ll give you 30 focused minutes on the vendor slides."', p:3, rel:2, ach:'exit', concept:'Protecting priorities',
+    {x:'"I want to help, but I\'m due at Dana\'s in three minutes. Can I find you at 10 and give you 30 minutes?"', p:3, rel:2, ach:'exit', concept:'Protecting priorities',
      reply:'10:00 works. Thank you, seriously.',
      fb:'You stayed calm, protected your meeting, and still showed up for her with a specific offer. That\'s handling competing priorities well.'},
-    {x:'"Sorry, I can\'t right now. I\'ll message you after my 9:15."', p:2, rel:0, concept:'A clean no',
+    {x:'"Sorry, I can\'t right now. I\'ll message you after my 9:15. Good luck with the pitch prep."', p:2, rel:0, concept:'A clean no',
      reply:'Okay, sure. Talk later.',
      fb:'Clear and polite. You protected your time and the relationship held steady. Naming a specific time, or thanking her, would have built a little more trust.'},
-    {x:'"Sure, let\'s do it now." (You\'ll be late to Dana.)', p:1, rel:1, late:true, concept:'Competing priorities',
+    {x:'"Sure, let\'s do it now. Pull up the slides and walk me through them." (You\'ll be late to Dana.)', p:1, rel:1, late:true, concept:'Competing priorities',
      reply:'Great! So, first question… (It\'s 9:31 when you finally reach Dana\'s door.)',
      fb:'Priya appreciates it. The cost: you show up 16 minutes late to a manager who\'s already stressed, on the morning that matters most. "Not now, but soon" is a self-management skill.'},
-    {x:'"Can\'t talk!" and keep walking.', p:-1, rel:-1, concept:'Impact under pressure',
+    {x:'"Can\'t talk!" and keep walking toward Dana\'s office without looking back.', p:-1, rel:-1, concept:'Impact under pressure',
      reply:'…Oh. Okay. (She looks a little stung.)',
      fb:'Cutting someone off under pressure is a self-management slip, not just a relationship one. Some coworkers can shrug that off, but in this office it lands badly: she asked for help, and she\'ll remember how that felt.'},
-    {x:'"Honestly? I don\'t have time for your stuff today."', p:-2, rel:-3, concept:'Stress spillover',
+    {x:'"Honestly? I don\'t have time for your stuff today. Find someone else to look at it."', p:-2, rel:-3, concept:'Stress spillover',
      reply:'Wow. Okay. (She turns and walks off. Two people nearby heard it.)',
      fb:'Your stress from last night spilled onto someone else, in public. Blame and brush-offs in a hallway cost a lot of trust. A pause would have changed everything here.'}
    ]}
@@ -1428,7 +1622,7 @@ const STEPS_LUNCH = [
      fb:'You named the trigger: advice that goes unused. The next layer is what that means to you, like feeling unheard or helpless.'},
     {x:'Honestly, I just want to talk about something else for once.', p:2, concept:'Knowing your limits',
      fb:'Knowing you\'re running low is real self-awareness. Notice it, so it doesn\'t leak out as impatience.'},
-    {x:'Maya is being dramatic.', p:1, concept:'Thoughts vs. feelings',
+    {x:'Maya is being dramatic, and they always make things bigger than they are.', p:1, concept:'Thoughts vs. feelings',
      fb:'That\'s a judgment about Maya, not a feeling of yours. Ask what that thought is protecting you from.'}
   ]},
   {type:'skills', comp:'rm', scene:'cafe', view:'phone', time:'Wednesday · 12:41 PM',
@@ -1437,26 +1631,26 @@ const STEPS_LUNCH = [
    sa:{title:'How does the buzz land for you?', options:[
      {x:'A jolt of anxiety. It\'s Dana, and part of me is still at work.', p:3, concept:'Naming the pull',
       fb:'Naming the pull ("part of me is still at work") makes it easier to choose where your attention goes.'},
-     {x:'Annoyed that work is following me to lunch.', p:2, concept:'Naming the feeling',
+     {x:'Annoyed that work is following me to lunch, even on my break.', p:2, concept:'Naming the feeling',
       fb:'Honest and specific. Noticing the annoyance keeps it from leaking into your face while Maya is talking.'},
-     {x:'Nothing. It\'s just a phone.', p:1, concept:'Missing the signal',
+     {x:'Nothing. It\'s just a phone, and I can check it later if it\'s important.', p:1, concept:'Missing the signal',
       fb:'Maybe, but your eyes went straight to it. Even small pulls are worth noticing.'}]},
    sm:{title:'What do you do with the phone?', options:[
      {x:'Flip it face down and keep listening.', p:3, ach:'present', fr:{you:1, maya:2}, concept:'Being fully present',
       say:'(Maya notices. Their shoulders drop a little.) "Anyway… sorry. It\'s just been a lot."',
       fb:'Small move, big signal. Putting the phone away says Maya matters more than the buzz.'},
-     {x:'Glance at it under the table while Maya talks.', p:1, fr:{maya:-1}, concept:'Divided attention',
+     {x:'Glance at it under the table while Maya talks.', p:1, fr:{}, set:'phone', concept:'Divided attention',
       say:'(Maya\'s voice trails off for a second. They noticed.)',
       fb:'You thought it was subtle. It usually isn\'t, and it tells Maya they\'re competing with your phone.'},
-     {x:'"Sorry, one sec, it\'s my boss." Reply quickly.', p:-1, fr:{maya:-2}, concept:'Divided attention',
+     {x:'"Sorry, one sec, it\'s my boss." Reply quickly.', p:-1, fr:{you:-2, maya:-1}, set:'phone', concept:'Divided attention',
       say:'"Oh. No, go ahead." (Maya picks up their own phone.)',
       fb:'Answering mid-story, when things are already strained, confirms Maya\'s fear of being a burden. Dana can wait until after lunch.'}]},
    soa:{title:'Look at Maya. What do you notice?', options:[
-     {x:'Their eyes flick to my phone and they slow down mid-sentence. They\'re wondering if I\'m still with them.', p:3, fr:{you:1}, concept:'Reading cues',
+     {x:'Their eyes flick to my phone and they slow down. They\'re wondering if I\'m still listening.', p:3, fr:{you:1}, concept:'Reading cues',
       fb:'You caught a tiny cue and read what it might mean. That\'s social awareness in a split second.'},
-     {x:'They seem a little annoyed with me.', p:2, concept:'Cue vs. story',
+     {x:'They seem a little annoyed with me, but they\'re still talking, so maybe it\'s nothing.', p:2, concept:'Cue vs. story',
       fb:'You noticed something shifted. "Annoyed" is one guess; "wondering if I\'m listening" is another. Hold it loosely.'},
-     {x:'They\'re still talking, so it\'s fine.', p:1, concept:'Missing cues',
+     {x:'They\'re still talking, so it\'s fine. They probably didn\'t even notice the buzz.', p:1, concept:'Missing cues',
       fb:'Words keep going even when attention drops. Watch the eyes and pace, not just whether they\'re talking.'}]},
    noSm:{say:'(You leave the phone where it is. Maya keeps going.)', fr:{}},
    outcome:'How Maya responds'},
@@ -1468,42 +1662,45 @@ const STEPS_LUNCH = [
       fb:'Finding the worry under the impatience changes what you do next: you lead with care instead of irritation.'},
      {x:'Irritation that we\'re stuck in the same loop.', p:2, concept:'Naming the feeling',
       fb:'Clear and honest. Naming it gives you a beat before it shows up in your tone.'},
-     {x:'Boredom. I\'ve heard this before.', p:1, concept:'Surface label',
+     {x:'Boredom. I\'ve heard this exact story before, and I know how it ends.', p:1, concept:'Surface label',
       fb:'Boredom is real, but it\'s often a cover for something heavier, like feeling helpless.'}]},
    sm:{title:'What do you do with that feeling?', options:[
-     {x:'Ask a question: "What do you want to happen here? What would feel like a win for you?"', p:3, fr:{you:2, maya:2}, concept:'Asking instead of advising',
+     {x:'Ask a question: "What do you want to happen here? What would feel like a win for you?"', p:3, fr:{you:2, maya:2}, set:'win', concept:'Asking instead of advising',
       say:'"…Huh. Honestly? I want him to know it was my work. Maybe I could ask for a one-on-one." (Maya sits up a little.)',
       fb:'A good question turns impatience into curiosity and puts Maya back in charge of their situation.'},
-     {x:'Take a breath and remember why you\'re here.', p:2, fr:{you:1, maya:1}, concept:'Managing impatience',
+     {x:'Take a breath and remember why you\'re here: they\'re your friend, and they\'re hurting.', p:2, fr:{you:1, maya:1}, concept:'Managing impatience',
       fb:'Catching the feeling before it runs the conversation is real self-management. A question would move things forward.'},
-     {x:'Keep nodding along, even though you\'ve checked out.', p:1, fr:{maya:-1}, concept:'Checking out',
+     {x:'Keep nodding along, even though you\'ve checked out.', p:1, fr:{}, concept:'Checking out',
       fb:'It keeps the peace, but people can tell when you\'ve left the room.'},
-     {x:'Sigh and say, "We\'ve been over this."', p:-1, fr:{you:1, maya:-3}, concept:'Leaking frustration',
+     {x:'Sigh and say, "We\'ve been over this."', p:-1, fr:{you:-2, maya:-2}, set:'sighed', concept:'Leaking frustration',
       say:'"…Right. Sorry." (Maya stops talking.)',
       fb:'Said out of impatience, it lands as dismissal, and it shuts Maya down right when they\'re most vulnerable.'}]},
    soa:{title:'What is Maya showing you?', options:[
-     {x:'They keep circling because they haven\'t felt heard yet. They\'re looking for something, not just repeating.', p:3, fr:{you:1, maya:1}, concept:'Reading the need',
+     {x:'They keep circling because they haven\'t felt heard yet. They\'re looking for something.', p:3, fr:{you:1, maya:1}, concept:'Reading the need',
       fb:'Repeating a story is often a sign someone hasn\'t felt heard. Seeing that turns impatience into empathy.'},
-     {x:'They seem stuck.', p:2, concept:'Reading cues',
+     {x:'They seem stuck, like they don\'t know what to do next or where to start.', p:2, concept:'Reading cues',
       fb:'Yes. The next question is what they might need to get unstuck.'},
-     {x:'They just like to complain.', p:1, concept:'Judgment vs. observation',
+     {x:'They just like to complain. This is what they always do when we get together.', p:1, concept:'Judgment vs. observation',
       fb:'That\'s a judgment, not an observation. Look for what the repetition might be telling you.'}]},
-   noSm:{say:'(You stay quiet. Maya keeps circling, and you feel your jaw tighten.)', fr:{you:-1}},
+   noSm:{say:'(You stay quiet. Maya keeps circling, and you feel your jaw tighten.)', fr:{}},
    outcome:'How the conversation shifts'},
   {comp:'soa', scene:'cafe', view:'close', time:'Wednesday · 12:58 PM', n:'1 of 2',
    title:'Maya laughs it off.', prompt:'What do you notice?',
    subs:{who:'maya', x:'"Ugh, whatever, it\'s fine. I\'m used to it by now." (Maya laughs, pushes the food around, and doesn\'t look up.)'},
    type:'choice', options:[
-    {x:'Maya says it\'s fine, but isn\'t eating and won\'t look up. This is hitting harder than they\'re letting on.', p:3, ach:'beneath', fr:{you:1}, concept:'Reading beneath the words',
+    {x:'Maya says it\'s fine, but isn\'t eating or looking up. This is hitting harder than they\'re showing.', p:3, ach:'beneath', fr:{you:1}, concept:'Reading beneath the words',
      fb:'You noticed the gap between what Maya said and what Maya is showing. That\'s where the real conversation is.'},
-    {x:'Maya is frustrated with their manager.', p:2, concept:'Reading cues',
+    {x:'Maya is frustrated with their manager, which makes sense after what happened.', p:2, concept:'Reading cues',
      fb:'True, but look one layer deeper: the laugh and the untouched food suggest hurt, maybe self-doubt, not just frustration.'},
-    {x:'Maya said it\'s fine, so it\'s probably fine.', p:1, concept:'Checking for accuracy',
+    {x:'Maya said it\'s fine, so it\'s probably fine. They\'d tell me if it wasn\'t.', p:1, concept:'Checking for accuracy',
      fb:'"Fine" is a clue, not a conclusion. Tune in to their body language and check it for accuracy, then ask a question that could move them from fine to good, like "What would make this week a little better?"'}
   ]},
   {comp:'rm', scene:'cafe', view:'two', time:'Wednesday · 1:05 PM', n:'1 of 2',
    title:'What do you say?', prompt:'Maya finally looks up at you.',
    subs:{who:'maya', x:'"I don\'t know. Maybe I\'m just bad at this job."'},
+   subsIf:[
+     {when:S => S.flags.win, why:'you asked what would feel like a win', subs:{who:'maya', x:'"I keep thinking about that one-on-one idea. I just don\'t know if I\'m good enough to push for it."'}},
+     {when:S => S.flags.phone, why:'you checked your phone mid-story', subs:{who:'maya', x:'"I don\'t know. Maybe I\'m just bad at this job." (Maya glances at your phone on the table.)'}}],
    type:'choice', options:[
     {x:'"What do you need from me right now: advice, or just someone to listen?"', p:3, ach:'askfirst', fr:{you:2, maya:3}, concept:'Asking what they need',
      say:'"…Honestly? Just listen. Thank you for asking that."',
@@ -1511,30 +1708,31 @@ const STEPS_LUNCH = [
     {x:'"Can I share a thought, or do you just want to vent today?"', p:2, fr:{you:1, maya:2}, concept:'Asking before advising',
      say:'"Maybe later. Right now I just need to get it out."',
      fb:'Asking permission before advice is respectful and gives Maya the choice. Leading with what they need would open even more.'},
-    {x:'"I\'ve been there. That\'s really hard."', p:2, fr:{maya:1}, concept:'Empathy',
+    {x:'"I\'ve been there. That\'s really hard, and it makes total sense you\'re upset."', p:2, fr:{maya:1}, concept:'Empathy',
      say:'"Yeah. It is."',
      fb:'Warm and validating. Keep the focus on Maya by following it with a question.'},
-    {x:'"Ugh, that happened to me too. My old boss used to…"', p:1, fr:{maya:-1}, concept:'Making it about you',
+    {x:'"Ugh, that happened to me too. My old boss used to…"', p:1, fr:{}, concept:'Making it about you',
      say:'"…Yeah." (Maya waits for you to finish.)',
      fb:'Sharing can build connection, but right now it shifts the spotlight to you when Maya needs it.'},
-    {x:'"It\'ll get better though! Everything changes."', p:1, fr:{maya:-1}, concept:'Rushing to positivity',
+    {x:'"It\'ll get better though! Everything changes."', p:1, fr:{}, concept:'Rushing to positivity',
      say:'"Sure. I guess." (Maya shrugs.)',
      fb:'You meant to comfort, but quick reassurance can feel like being brushed off. Sit with the hard part first.'}
   ]},
   {comp:'rm', scene:'cafe', view:'close', time:'Wednesday · 1:15 PM', n:'2 of 2',
    title:'Maya names the strain.', prompt:'This is your chance to repair things. What do you say?',
    subs:{who:'maya', x:'"Sorry. I know I keep bringing this up. You\'re probably sick of hearing about it."'},
+   subsIf:[{when:S => S.flags.sighed, why:'you sighed "We\'ve been over this"', subs:{who:'maya', x:'"Sorry. I know, \'we\'ve been over this.\' You\'re probably sick of hearing about it."'}}],
    type:'choice', options:[
-    {x:'"Can I share an observation? I get frustrated when we circle back to the same thing, and I think it\'s made me a little distant. Can we figure out together what would actually help?"', p:3, ach:'repair', fr:{you:3, maya:3}, concept:'Repairing the relationship',
+    {x:'"Can I share an observation? I get frustrated when we circle back, and I think I\'ve pulled away. Can we fix that?"', p:3, ach:'repair', fr:{you:3, maya:3}, concept:'Repairing the relationship',
      say:'"…Thank you for saying that. I\'ve felt you pulling away and didn\'t know why. Yeah. Let\'s figure it out."',
      fb:'You asked before sharing, named the strain honestly, owned your part, and invited Maya in. That\'s how a strained relationship turns around.'},
-    {x:'"Honestly? Yeah, a little. I give advice and nothing changes."', p:2, fr:{you:1, maya:-1}, concept:'Honoring your feelings',
+    {x:'"Honestly? Yeah, a little. I give advice and nothing changes. It\'s hard having the same conversation."', p:2, fr:{you:2}, concept:'Honoring your feelings',
      say:'"Oh. Okay." (Maya looks away.)',
      fb:'Being honest about how you feel matters, and it does move the relationship forward. But given Maya\'s body language right now, asking "Can I share an observation?" first would have honored your feelings and landed better.'},
-    {x:'"No, it\'s fine! Really."', p:1, fr:{you:-2, maya:1}, concept:'Avoiding the strain',
+    {x:'"No, it\'s fine! Really. I\'m always happy to listen, you know that."', p:1, fr:{you:-1, maya:1}, concept:'Avoiding the strain',
      say:'"Okay. Good." (The frustration rides back to the office with you.)',
      fb:'It smooths over the moment, but the strain is still there for you. Unspoken frustration tends to come back as distance.'},
-    {x:'"Have you thought about just leaving that job?"', p:1, fr:{maya:-1}, concept:'Advice over connection',
+    {x:'"Have you thought about just leaving that job? Honestly, it sounds like they don\'t deserve you."', p:1, fr:{}, concept:'Advice over connection',
      say:'"…I mean, it\'s not that simple."',
      fb:'More advice right after Maya apologized for needing support. They needed reassurance about the friendship first.'}
   ]},
@@ -1544,9 +1742,9 @@ const STEPS_LUNCH = [
    type:'choice', options:[
     {x:'Ask: "Before you go, how are we doing? I want to make sure we\'re good."', p:3, ask:true, concept:'Checking for accuracy',
      fb:'You tested your read instead of assuming it. You can guess how someone sees the relationship, but only they can tell you.'},
-    {x:'Text later: "Good lunch today!"', p:2, concept:'A light check-in',
+    {x:'Text later: "Good lunch today! Let\'s do this again soon."', p:2, concept:'A light check-in',
      fb:'A friendly follow-up keeps the door open, but it doesn\'t ask how they\'re actually feeling about the friendship.'},
-    {x:'Assume it went well. Maya smiled at the end.', p:1, concept:'Assuming',
+    {x:'Assume it went well. Maya smiled at the end, and things felt lighter.', p:1, concept:'Assuming',
      fb:'A smile is a clue, not an answer. You can guess how someone sees things, but you can\'t know until you ask.'}
   ]},
   {type:'end'}
@@ -1559,7 +1757,7 @@ const ACHS_LUNCH = [
   {id:'repair',   name:'Repair',            how:'Name the strain kindly and work it out together'}
 ];
 const SCENS = {
-  board:{steps:STEPS_BOARD, face:'dana', title:'The Board Deck', line:'Get through two days with a stressed-out boss without losing your cool.'},
+  board:{steps:STEPS_BOARD, face:'dana', title:'An Unexpected Deadline', line:'Get through two days with a stressed-out boss without losing your cool.'},
   lunch:{steps:STEPS_LUNCH, face:'maya', title:'Lunch with Maya', line:'Your friendship with Maya is strained. Use this lunch to practice your EQ and improve your relationship.'}
 };
 let SCEN = 'board';
@@ -1577,7 +1775,7 @@ let S, run = 0;
 const $ = id => document.getElementById(id);
 const esc = s => P(String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const wait = ms => new Promise(r => setTimeout(r, ms));
-const fresh = () => ({i:0, scores:{sa:0,sm:0,soa:0,rm:0}, history:[], chat:[], unread:0, dnd:false, danaReply:'', visited:{}, at:'desk', late:false, rel:{}, xp:0, level:1, ach:[], fr:{you:-6, maya:-5}});
+const fresh = () => ({i:0, scores:{sa:0,sm:0,soa:0,rm:0}, history:[], chat:[], unread:0, dnd:false, danaReply:'', visited:{}, at:'desk', late:false, rel:{}, xp:0, level:1, ach:[], fr:{you:-5, maya:-4}, flags:{}});
 
 /* ---------- HUD ---------- */
 const ABBR = {sa:'SA', sm:'SM', soa:'SoA', rm:'RM'};
@@ -1589,7 +1787,7 @@ const DEFS = {
 };
 const SHORT = {sa:'Self-Awareness', sm:'Self-Management', soa:'Social Awareness', rm:'Relationships'};
 function ringHtml(c, idp = ''){
-  return `<div class="meter" id="${idp}m-${c.k}" tabindex="0">
+  return `<div class="meter sk-${c.k}" id="${idp}m-${c.k}" tabindex="0">
       <div class="skring" id="${idp}mb-${c.k}"><span id="${idp}mn-${c.k}">0</span></div>
       <div class="ml"><span>${SHORT[c.k]}</span><b id="${idp}mv-${c.k}">0/${MAXES[c.k]}</b></div>
       ${idp ? '' : `<div class="tip"><b>${c.full}</b>${DEFS[c.k]}</div>`}`;
@@ -1647,15 +1845,31 @@ function badge(a, locked){
   // every achievement uses the same brain medal; earned ones are mint and navy, locked ones are grey
   return `<span class="badge${locked ? ' locked' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true">${BRAIN_SVG}</svg></span>`;
 }
+const ACH_INFO = {
+  name:{skill:'Self-Awareness', why:'Naming two feelings instead of one gives your brain more to work with. Before your next hard conversation, name two things you\'re feeling.'},
+  perspective:{skill:'Self-Management', why:'Someone outside the situation can see what you can\'t. Find your “Gloria” before big conversations.'},
+  pause:{skill:'Self-Management', why:'One breath lets your thinking catch up with your feelings. In person, pause a beat before you answer a tense question.'},
+  read:{skill:'Social Awareness', why:'You noticed a cue and asked about it with care. In real meetings, name what you see kindly, then ask.'},
+  hard:{skill:'Relationship Management', why:'An honest limit plus a real offer builds trust. Next time you can\'t say yes, say what you can do.'},
+  exit:{skill:'Self-Management + Relationship Management', why:'“Not now, but soon” protects your priorities and the relationship. Use it the next time you\'re stopped in a hallway.'},
+  present:{skill:'Self-Management + Relationship Management', why:'Putting the phone away tells people they matter. Try it at your next lunch or one-on-one.'},
+  beneath:{skill:'Social Awareness', why:'“Fine” often isn\'t. Watching body language helps you respond to what\'s really going on.'},
+  askfirst:{skill:'Relationship Management', why:'Asking what someone needs beats guessing. Try “Advice, or just listening?” this week.'},
+  repair:{skill:'Relationship Management', why:'Naming a strain kindly and owning your part is how relationships recover. It works at home and at work.'}
+};
 function achieve(id){
   const a = ACHS.find(x => x.id === id);
   if (!a || S.ach.includes(id)) return;
   S.ach.push(id);
+  if (SCEN === 'lunch' && !(REPLAY && REPLAY.final.ach.includes(id))) applyFr({you:2, maya:2});
   setTimeout(() => {
     const d = document.createElement('div'); d.className = 'ach';
-    d.innerHTML = `${badge(a)}<div><small>Achievement unlocked</small><b>${esc(a.name)}</b></div>`;
-    d.style.top = (92 + 70 * document.querySelectorAll('.ach').length) + 'px';
-    document.body.appendChild(d); setTimeout(() => d.remove(), 3900);
+    const info = ACH_INFO[id] || {};
+    d.innerHTML = `${badge(a)}<div><small>Achievement unlocked</small><b>${esc(a.name)}</b>${info.skill ? `<em>${esc(info.skill)}</em>` : ''}${info.why ? `<p>${esc(info.why)}</p>` : ''}</div>`;
+    d.style.top = (110 + 150 * document.querySelectorAll('.ach').length) + 'px';
+    d.onclick = () => d.remove();
+    document.body.appendChild(d); setTimeout(() => d.remove(), 6500);
+    SFX.ach();
   }, 900);
 }
 function floatAt(el, pts, label = ''){
@@ -1672,6 +1886,7 @@ function award(comp, pts, el){
   S.scores[comp] = Math.max(0, Math.min(MAXES[comp], before + pts));
   const added = S.scores[comp] - before;
   if (el) floatAt(el, pts * 10, 'XP');
+  if (pts > 0) SFX.xp(); else if (pts < 0) SFX.cost();
   setTimeout(() => { floatAt($('m-'+comp), added); paintHud(comp); const m = $('m-'+comp); m.classList.remove('pulse'); void m.offsetWidth; m.classList.add('pulse'); }, 400);
   return added;
 }
@@ -1692,6 +1907,7 @@ function renderFeed(){
   $('myStatus').className = 'st' + (S.dnd ? ' dnd' : '');
 }
 function toast(kind, x, title = 'Dana Reyes'){
+  SFX.ping();
   const t = document.createElement('div');
   t.className = 'toast';
   const icon = kind === 'mail' ? `<div class="ic mail">✉</div>` : `<div class="ic" style="${faceStyle('dana')}"></div>`;
@@ -1722,6 +1938,7 @@ async function typeCompose(my, text, speed){
   return true;
 }
 async function playIncoming(my){
+  SFX.armed = true;
   for (const m of INCOMING){
     await wait(m.kind === 'mail' ? 900 : 1000);
     if (my !== run) return false;
@@ -1805,7 +2022,7 @@ function showScene(name){
   $('device').hidden = name !== 'desk';
   $('office').hidden = name !== 'office';
   $('map').hidden = name !== 'map';
-  $('sceneTitle').textContent = {desk:'Your desk', office:'Dana\'s office', map:'The 4th floor'}[name];
+  $('sceneTitle').textContent = {desk:'Your desk', office:'Dana\'s office', map:''}[name];
   $('hudPlace').textContent = $('sceneTitle').textContent;
 }
 
@@ -1973,6 +2190,7 @@ function relLine(who, d){
 }
 
 function renderBonus(v, after, nextLabel = 'Back to the hallway'){
+  if (v.options) v = {...v, options:shuffled(v.options)};
   const c = COMPS.find(x => x.k === v.comp);
   speaker(v.who);
   const head = `<div class="comp-chip"><i></i>Bonus · ${c.full}</div>
@@ -2002,6 +2220,7 @@ function renderBonus(v, after, nextLabel = 'Back to the hallway'){
     v.options.forEach((_, k) => $('opt-'+k).disabled = true);
     e.currentTarget.classList.add('picked');
     const added = award(v.comp, o.p, e.currentTarget);
+    if (o.set) S.flags[o.set] = true;
     S.history.push({comp:v.comp, title:'Bonus: ' + v.title, choice:o.x, p:o.p, bonus:true, fb:o.fb, concept:o.concept, best:(v.options.find(x => x.p === 3) || {}).x});
     if (o.ach) achieve(o.ach);
     if (o.reply){ bubble(v.who, o.reply, v.who === 'jordan' ? 'left' : 'right'); if (!$('office').hidden) subs({who:v.who, x:o.reply}); }
@@ -2015,9 +2234,11 @@ function renderBonus(v, after, nextLabel = 'Back to the hallway'){
 }
 
 /* ---------- card ---------- */
+let CALLBACK = false;
 function cardHead(st){
   const c = COMPS.find(x => x.k === st.comp);
-  return `<div class="comp-chip"><i></i>${c.full}<em>· ${st.n}</em></div>
+  const cb = CALLBACK ? `<div class="callback">\u21ba Because ${esc(CALLBACK)}</div>` : ''; CALLBACK = false;
+  return `${cb}<div class="comp-chip"><i></i>${c.full}<em>· ${st.n}</em></div>
     <h2>${esc(st.title)}</h2>
     ${st.quote ? `<div class="quote"><b>Dana</b>${esc(st.quote)}</div>` : ''}
     <p class="prompt">${esc(st.prompt)}</p>`;
@@ -2036,10 +2257,42 @@ function fbHtml(pts, comp, label, body, concept, last){
 }
 function bindNext(){ const b = $('nextBtn'); if (!b) return; b.disabled = false; b.focus({preventScroll:true}); b.onclick = () => go(S.i + 1); }
 
+let SNAP = {}, REPLAY = null;
+const clone = o => JSON.parse(JSON.stringify(o));
+const shuffled = a => { const b = a.slice(); for (let k = b.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [b[k], b[j]] = [b[j], b[k]]; } return b; };
+/* ---------- sound: tiny synthesized effects, no audio files ---------- */
+const SFX = {
+  ctx:null, on:true, armed:false,
+  init(){ try { this.on = localStorage.getItem('eqxp-sound') !== 'off'; } catch(e){} },
+  ac(){ if (!this.ctx){ try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return null; } } if (this.ctx.state === 'suspended') this.ctx.resume(); return this.ctx; },
+  tone(freq, start, dur, type = 'sine', vol = .12){
+    if (!this.armed || !this.on) return;
+    const c = this.ac(); if (!c) return;
+    const o = c.createOscillator(), g = c.createGain(), t = c.currentTime + start;
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + .02);
+  },
+  click(){ this.tone(660, 0, .05, 'triangle', .05); },
+  ping(){ this.tone(1320, 0, .12, 'sine', .09); this.tone(1760, .09, .16, 'sine', .07); },
+  xp(){ this.tone(784, 0, .12, 'triangle', .09); this.tone(1047, .08, .2, 'triangle', .09); },
+  cost(){ this.tone(220, 0, .22, 'sawtooth', .05); this.tone(165, .12, .3, 'sawtooth', .05); },
+  ach(){ [523, 659, 784, 1047].forEach((f, k) => this.tone(f, k * .09, .28, 'triangle', .09)); },
+  set(v){ this.on = v; try { localStorage.setItem('eqxp-sound', v ? 'on' : 'off'); } catch(e){} paintSound(); }
+};
+SFX.init();
+function paintSound(){ document.querySelectorAll('.soundbtn').forEach(b => { b.setAttribute('aria-pressed', SFX.on); b.title = SFX.on ? 'Sound on' : 'Sound off'; b.innerHTML = SFX.on ? SPK_ON : SPK_OFF; }); }
+const SPK_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const SPK_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>';
+document.addEventListener('click', e => { if (e.target.closest('.opt,.chip,.skillbtn,.btn,.avthumb,.scen,.place,.spot')) SFX.click(); }, true);
 async function go(i){
+  // replaying one moment: once it's done, merge the new result into the finished run and show results again
+  if (REPLAY && i !== REPLAY.i){ return finishReplay(); }
+  if (!REPLAY) SNAP[i] = clone(S);
   S.i = i; const my = ++run;
   let st = STEPS[i];
   if (S.late && st.lateOption) st = {...st, options:[st.lateOption].concat(st.options.slice(1))};
+  if (st.options) st = {...st, options:shuffled(st.options)};
   speaker('sam');
   window.scrollTo({top:0, behavior:'smooth'});
   paintHud(st.comp);
@@ -2056,6 +2309,7 @@ async function go(i){
     return;
   }
   if (st.type === 'lunchStart'){
+    SFX.armed = true;
     setTime('Wednesday · 12:30 PM'); setConvo('maya'); setLunchView('close'); showScene('office');
     $('sceneTitle').textContent = $('hudPlace').textContent = CLOSE.maya.place;
     $('ptag').textContent = 'Wednesday · 12:30 PM'; subs({who:'scene', x:'Maya is already at a table by the window and waves, a little less brightly than usual.'});
@@ -2064,7 +2318,7 @@ async function go(i){
     if (my === run) go(S.i + 1);
     return;
   }
-  if (st.type === 'end'){ renderEnd(); return; }
+  if (st.type === 'end'){ if (SCEN === 'lunch' && !S.flags.bye){ S.flags.bye = 1; applyFr({you:2, maya:2}); } renderEnd(); return; }
 
   showScene(st.scene === 'cafe' ? 'office' : st.scene);
   setTime(st.time);
@@ -2073,6 +2327,8 @@ async function go(i){
     setConvo('dana'); setLunchView('close'); $('convo').classList.remove('face-cut');
     $('ptag').textContent = st.time; if (st.photo) setPhoto(st.photo);
     const first = STEPS[i - 1] && STEPS[i - 1].type === 'hub';
+    const cbo = (st.subsIf || []).find(c => c.when(S)); if (cbo){ st = {...st, subs:cbo.subs}; CALLBACK = cbo.why; }
+    if (first && S.late) CALLBACK = 'you showed up 16 minutes late';
     subs(first && S.late ? {who:'scene', x:'It\'s 9:31. Dana glances at the clock, then back at her screen. She doesn\'t look up again. "Let\'s just get started."'} : st.subs);
     if (first && S.late && !S.lateHit){ S.lateHit = true; setTimeout(() => relChange('dana', -2, 'Showed up 16 minutes late'), 900); }
     if (first && S.late){ $('ptag').textContent = 'Wednesday · 9:31 AM'; setTime('Wednesday · 9:31 AM'); }
@@ -2081,6 +2337,7 @@ async function go(i){
   if (st.scene === 'cafe'){
     setConvo('maya'); setLunchView(st.view || 'close');
     $('sceneTitle').textContent = $('hudPlace').textContent = CLOSE.maya.place;
+    const cbl = (st.subsIf || []).find(c => c.when(S)); if (cbl){ st = {...st, subs:cbl.subs}; CALLBACK = cbl.why; }
     $('ptag').textContent = st.time; subs(st.subs);
   }
   if (st.incoming){
@@ -2118,7 +2375,7 @@ function renderFeel(st){
     const picks = [...chosen].map(j => LIST[j]);
     const pts = feelScore(picks);
     lockChips('f', LIST); e.currentTarget.hidden = true;
-    S.history.push({comp:st.comp, title:st.title, choice:picks.join(', '), p:pts, fb:'There are no right or wrong emotions. The skill is noticing what\'s true for you and naming it. ' + picks.map(x => FEEL[x] ? x + ': ' + FEEL[x] : '').join(' '), concept:'Labeling emotions'});
+    S.history.push({si:S.i, comp:st.comp, title:st.title, choice:picks.join(', '), p:pts, fb:'There are no right or wrong emotions. The skill is noticing what\'s true for you and naming it. ' + picks.map(x => FEEL[x] ? x + ': ' + FEEL[x] : '').join(' '), concept:'Labeling emotions'});
     award(st.comp, pts, document.querySelector('.chips'));
     if (picks.length >= 2) achieve('name');
     const label = pts === 3 ? 'Specific and layered' : pts === 2 ? 'Honest label' : 'Honest label';
@@ -2143,7 +2400,7 @@ function renderFeel2(st){
     const n = [...now].map(j => NOW_LIST[j]), a = [...ahead].map(j => AHEAD_LIST[j]);
     const pts = (n.length ? 1 : 0) + (a.length ? 1 : 0) + (n.length && a.length ? 1 : 0);
     lockChips('n', NOW_LIST); lockChips('a', AHEAD_LIST); e.currentTarget.hidden = true;
-    S.history.push({comp:st.comp, title:'Now vs. 9:15 tomorrow', choice:`Now: ${n.join(', ') || '(none)'} · Tomorrow: ${a.join(', ') || '(none)'}`, p:pts, fb:'Anticipating how you\'ll feel gives you time to prepare instead of being surprised in the moment.', concept:'Anticipating emotions'});
+    S.history.push({si:S.i, comp:st.comp, title:'Now vs. 9:15 tomorrow', choice:`Now: ${n.join(', ') || '(none)'} · Tomorrow: ${a.join(', ') || '(none)'}`, p:pts, fb:'Anticipating how you\'ll feel gives you time to prepare instead of being surprised in the moment.', concept:'Anticipating emotions'});
     if (pts === 3) achieve('future');
     award(st.comp, pts, e.currentTarget.previousElementSibling);
     const hard = a.filter(x => HARD_AHEAD.includes(x));
@@ -2182,14 +2439,15 @@ function renderSkills(st, my){
     const step = idx => {
       if (my !== run) return;
       if (idx >= order.length) return outcome();
-      const k = order[idx], q = st[k];
+      const k = order[idx], q = {...st[k], options:shuffled(st[k].options)};
       $('card').innerHTML = `<div class="comp-chip"><i></i>${name(k)}<em>· skill ${idx + 1} of ${order.length}</em></div><h2>${esc(q.title)}</h2>
         <div class="opts">${q.options.map((o, j) => `<button class="opt" id="opt-${j}"><span class="k">${'ABCDE'[j]}</span><span>${esc(o.x)}</span></button>`).join('')}</div><div id="fbHost"></div>`;
       q.options.forEach((o, j) => $('opt-'+j).onclick = e => {
         q.options.forEach((_, m) => $('opt-'+m).disabled = true);
         e.currentTarget.classList.add('picked');
-        S.history.push({comp:k, title:st.title + ' (' + name(k) + ')', choice:o.x, p:o.p, fb:o.fb, concept:o.concept, best:(q.options.find(x => x.p === 3) || {}).x});
+        S.history.push({si:S.i, comp:k, title:st.title + ' (' + name(k) + ')', choice:o.x, p:o.p, fb:o.fb, concept:o.concept, best:(q.options.find(x => x.p === 3) || {}).x});
         award(k, o.p, e.currentTarget);
+        if (o.set) S.flags[o.set] = true;
         if (o.ach) achieve(o.ach);
         if (o.fr) setTimeout(() => applyFr(o.fr), 500);
         if (o.say) subs({who:'maya', x:o.say});
@@ -2203,7 +2461,7 @@ function renderSkills(st, my){
       if (!smChoice){ subs({who:'scene', x:st.noSm.say}); applyFr(st.noSm.fr); }
       const d = S.fr.maya - before.maya;
       const rp = d >= 3 ? 3 : d >= 1 ? 2 : d === 0 ? 1 : -1;
-      S.history.push({comp:'rm', title:st.title + ' (outcome)', choice:order.map(name).join(' + '), p:rp,
+      S.history.push({si:S.i, comp:'rm', title:st.title + ' (outcome)', choice:order.map(name).join(' + '), p:rp,
         fb: rp >= 2 ? 'Using your skills together showed up in the relationship: Maya felt it.' : rp === 1 ? 'Nothing broke, but nothing moved either. Combining skills usually gets more traction.' : 'This moment cost the relationship a little. Self-Management is often the skill that protects it.'});
       award('rm', rp, null);
       const used = Object.entries(S.skillUse).filter(([, v]) => v > 0).map(([k]) => k);
@@ -2226,8 +2484,9 @@ function renderChoice(st, my){
   st.options.forEach((o, j) => $('opt-'+j).onclick = async e => {
     st.options.forEach((_, k) => $('opt-'+k).disabled = true);
     const btn = e.currentTarget; btn.classList.add('picked');
-    S.history.push({comp:st.comp, title:st.title, choice:o.x, p:o.p, fb:o.fb, concept:o.concept, best:(st.options.find(x => x.p === 3) || {}).x});
+    S.history.push({si:S.i, comp:st.comp, title:st.title, choice:o.x, p:o.p, fb:o.fb, concept:o.concept, best:(st.options.find(x => x.p === 3) || {}).x});
     award(st.comp, o.p, btn);
+    if (o.set) S.flags[o.set] = true;
     if (o.ach) achieve(o.ach);
     const last = STEPS[S.i + 1].type === 'end';
     $('fbHost').innerHTML = fbHtml(o.p, st.comp, TIER[o.p], `<p>${esc(o.fb)}</p>`, o.concept, last);
@@ -2283,7 +2542,7 @@ async function effects(st, o, my){
   if (st.reply){
     if (!await typeCompose(my, o.x, 28)) return;
     S.chat.push({who:'y', t:'5:01 PM', x:o.x}); renderFeed(); setClock('5:01 PM');
-    S.danaReply = o.dana;
+    S.danaReply = o.dana; S.replyP = o.p;
     await danaTypes(my, o.dana, '5:03 PM', 1500);
   }
 }
@@ -2328,7 +2587,7 @@ const MOMENT_TIPS = [
   ['Cut in: "Okay, you really just need to go to HR."', 'You jumped in with the fix while Maya was still talking.', 'When you feel the urge to fix, ask first: "Do you want ideas, or do you just need to vent?"'],
   ['Keep nodding along', 'You checked out while Maya kept talking.', 'When you notice you\'ve checked out, name it to yourself and ask one real question to come back in.'],
   ['Sigh and say, "We\u2019ve been over this."', 'Your impatience slipped out with Maya.', 'When impatience spikes, take one breath before you speak, and say what you\'re feeling instead of showing it.'],
-  ['Maya is frustrated with their manager.', 'You read Maya\'s frustration but not what was underneath.', 'When someone laughs off something painful, look at what their body is doing, not just what they say.'],
+  ['Maya is frustrated with their manager', 'You read Maya\'s frustration but not what was underneath.', 'When someone laughs off something painful, look at what their body is doing, not just what they say.'],
   ['Maya said it\u2019s fine', 'You took Maya\'s "it\'s fine" at face value.', 'When someone says "it\'s fine," check their face, posture and appetite before you believe it.'],
   ['"Ugh, that happened to me too.', 'You shared your own story when Maya needed the spotlight.', 'Save your story for later. First ask one question about theirs.'],
   ['"It\u2019ll get better though!', 'You reassured Maya quickly.', 'Before you reassure, reflect what you heard: "That sounds really hurtful."'],
@@ -2344,28 +2603,59 @@ function focusTip(skill){
   const scored = mine.map(h => ({h, t:match(h)})).filter(x => x.t && x.h.p < 3).sort((a, b) => a.h.p - b.h.p);
   return scored.length ? {moment:scored[0].t[1], tip:scored[0].t[2]} : null;
 }
-const frLabel = v => v <= -5 ? 'Strained' : v < 0 ? 'Tense' : v < 4 ? 'Okay' : v < 7 ? 'Good' : 'Close';
+const frLabel = v => v <= -5 ? 'Strained' : v <= -2 ? 'Distant' : v < 2 ? 'Lighter' : v < 5 ? 'Warm' : 'Close';
 const frPct = v => (Math.max(-10, Math.min(10, v)) + 10) * 5;
 function paintFr(){ $('frYou').style.left = frPct(S.fr.you) + '%'; }
 function theirAnswer(){
   const v = S.fr.maya;
+  const sting = S.flags.phone ? ' And honestly, the phone thing stung a little."' : '"';
+  if (S.flags.phone) return (v >= 0 ? '"We\'re okay. Today helped.' : '"Honestly… I\'ve been worried I\'m a burden to you. Today was nice, though.') + sting;
   return v >= 5 ? '"Honestly? Better than we\'ve been in a while. Thank you for today."'
        : v >= 0 ? '"We\'re okay. I\'ve felt some distance lately, but today helped."'
-       : '"Honestly… I\'ve been feeling like a burden to you. Today didn\'t totally change that."';
+       : '"Honestly… I\'ve been worried I\'m a burden to you. But I\'m really glad we got lunch."';
 }
 function applyFr(d){
   if (d.you){ S.fr.you = Math.max(-10, Math.min(10, S.fr.you + d.you)); floatAt($('friendBar'), d.you, 'Friendship'); }
   if (d.maya) S.fr.maya = Math.max(-10, Math.min(10, S.fr.maya + d.maya));   // Maya's side stays hidden until the end
   paintFr();
 }
-function renderEnd(){
+function toughestMoment(){
+  const by = {};
+  S.history.filter(h => h.si !== undefined).forEach(h => { (by[h.si] = by[h.si] || {si:h.si, title:h.title.replace(/ \((Self|Social|Relationship).*\)$/, ''), p:0, n:0}); by[h.si].p += h.p; by[h.si].n++; });
+  const list = Object.values(by).filter(m => m.p < m.n * 3).sort((a, b) => a.p / a.n - b.p / b.n || a.si - b.si);
+  return list[0] || null;
+}
+function startReplay(m){
+  REPLAY = {i:m.si, final:clone(S), title:m.title, before:xpNow()};
+  S = clone(SNAP[m.si]);
+  $('results').hidden = true; $('dayCard').hidden = true;
+  if (SCEN === 'board') renderFeed();
+  paintHud(null); paintFr && SCEN === 'lunch' && paintFr();
+  go(m.si);
+}
+function finishReplay(){
+  const i = REPLAY.i, base = SNAP[i], after = SNAP[i + 1] || REPLAY.final, now = S, fin = REPLAY.final;
+  for (const k in fin.scores) fin.scores[k] = Math.max(0, Math.min(MAXES[k], fin.scores[k] + (now.scores[k] - after.scores[k])));
+  fin.fr.you = Math.max(-10, Math.min(10, fin.fr.you + (now.fr.you - after.fr.you)));
+  fin.fr.maya = Math.max(-10, Math.min(10, fin.fr.maya + (now.fr.maya - after.fr.maya)));
+  fin.history = fin.history.filter(h => h.si !== i).concat(now.history.filter(h => h.si === i));
+  now.ach.forEach(a => { if (!fin.ach.includes(a)) fin.ach.push(a); });
+  if (now.theirWords) fin.theirWords = now.theirWords;
+  const before = REPLAY.before, title = REPLAY.title;
+  REPLAY = null; S = fin; S.replayUsed = true; S.i = STEPS.length - 1;
+  paintHud(null);
+  renderEnd({title, before, after:xpNow()});
+}
+function renderEnd(replayed){
+  // one rough moment can't sink the lunch; it only ends worse if you keep choosing the hurtful option
+  if (SCEN === 'lunch' && S.history.filter(h => h.p < 0).length < 2){ S.fr.you = Math.max(S.fr.you, -4); S.fr.maya = Math.max(S.fr.maya, -3); }
   showScene('office');
   const total = Object.values(S.scores).reduce((a, b) => a + b, 0);
   const pct = total / TOTAL_MAX;
   if (SCEN === 'lunch'){
     setConvo('maya'); $('danaBig').className = 'pose-' + (S.fr.maya >= 3 ? 'smile' : 'listen');
     $('ptag').textContent = 'Wednesday · 1:30 PM'; setLunchView('two');
-    subs({who:'maya', x: S.fr.maya >= 3 ? '"Thank you. I really needed this today."' : '"Okay… well, thanks for lunch."'});
+    subs({who:'maya', x: S.fr.maya >= 3 ? '"Thank you. I really needed this today."' : '"Thanks for lunch. I\'m glad we did this."'});
     $('sceneTitle').textContent = 'Debrief'; setTime('Wednesday · 1:30 PM');
   } else {
   setPhoto(pct >= .75 ? 'smile' : 'listen');
@@ -2374,9 +2664,9 @@ function renderEnd(){
   $('sceneTitle').textContent = 'Debrief'; setTime('Wednesday · 9:26 AM');
   }
   const weakest = COMPS.slice().sort((a, b) => S.scores[a.k] / MAXES[a.k] - S.scores[b.k] / MAXES[b.k])[0];
-  const lunchLine = S.fr.you >= 4 && S.fr.maya >= 4 ? P('You went from strained to solid. Maya leaves feeling heard, and you leave feeling closer.')
-    : S.fr.you >= 0 && S.fr.maya >= 0 ? 'Things are better than when you sat down. There\'s still some repair to do.'
-    : 'The strain is still there, maybe more than before. Replay it and try the option that feels least natural.';
+  const lunchLine = S.fr.you >= 4 && S.fr.maya >= 4 ? P('You went from strained to close. Maya leaves feeling heard, and you leave feeling closer.')
+    : S.fr.you >= 0 ? P('Things feel lighter than when you sat down. One good lunch won\'t fix everything, but you\'re back on track.')
+    : P('You showed up, and that counts. Things are a little lighter. Replay a moment to see how much further it could go.');
   const line = SCEN === 'lunch' ? lunchLine : pct >= .85 ? 'You read the room. Dana leaves calmer than she arrived, and you set up a better pattern going forward.'
     : pct >= .6 ? 'Solid work. You stayed honest and kept the relationship strong. A few moments had a more effective option.'
     : 'You got through a stressful moment. Replay it and try the option that feels least natural; that\'s often where the growth is.';
@@ -2389,7 +2679,7 @@ function renderEnd(){
   const xp = xpNow();
   const bar = (v0, v) => `<div class="fbar"><i class="mark start" style="left:${frPct(v0)}%"></i><i class="mark" style="left:${frPct(v)}%"></i></div>`;
   const gap = Math.abs(S.fr.you - S.fr.maya);
-  const startV = -6, endV = S.fr.you;
+  const startV = -5, endV = S.fr.you;
   const moved = endV - startV;
   const frBlock = SCEN !== 'lunch' ? '' : `<div class="res-sec"><h3>Your relationship with ${esc(FRIEND.name)}</h3>
       <div class="frsum"><div><small>Started</small><b>${frLabel(startV)}</b></div><div class="arrowto">→</div><div><small>Ended</small><b>${frLabel(endV)}</b></div>
@@ -2414,19 +2704,22 @@ function renderEnd(){
         <div class="r-frend"><small>Ended</small><b>${frLabel(endV)}</b></div></div>
       <p class="r-note">${S.theirWords ? `<b>${esc(FRIEND.name)} said:</b> ${esc(S.theirWords)}` : `You didn\'t ask how ${esc(FRIEND.name)} sees the friendship, so you can only guess.`}</p></div>`;
   const confetti = pct >= .6 ? `<div class="r-confetti" aria-hidden="true">${Array.from({length:30}, (_, k) => `<i style="left:${(k * 37) % 100}%;animation-delay:${(k % 10) * .11}s;background:${['#0acc8b','#ffd34d','#7ff0c8','#ff8f93','#9fd0ee'][k % 5]}"></i>`).join('')}</div>` : '';
-  $('results').innerHTML = `<div class="r-wrap">${confetti}
+  const tough = perfect || S.replayUsed ? null : toughestMoment();
+  const replayNote = replayed ? `<div class="r-replay"><b>Replay: ${esc(replayed.title)}</b><span>${replayed.before} XP \u2192 ${replayed.after} XP${replayed.after > replayed.before ? ' \u2014 nice improvement!' : replayed.after === replayed.before ? ' \u2014 same result. Try a different option next time.' : ''}</span></div>` : '';
+  $('results').innerHTML = `<div class="r-wrap">${confetti}${replayNote}
     <div class="r-top"><span class="face r-face" data-face="sam"></span>
       <div><div class="r-kick">${SCEN === 'lunch' ? 'Lunch complete' : 'Scenario complete'}</div><div class="r-rank">${rank}</div><p class="r-line">${esc(line)}</p></div></div>
     <div class="r-xp"><div class="r-xpnum"><b id="xpCount">0</b><span>/ ${XP_MAX()} XP</span></div><div class="r-xpbar"><i id="xpBarEnd"></i></div></div>
-    <div class="r-skills">${COMPS.map(c => { const v = S.scores[c.k], m = MAXES[c.k]; return `<div class="r-skill${v >= m ? ' full' : ''}"><div class="r-ring" style="--p:${Math.round(v / m * 100)}"><span>${v}<small>/${m}</small></span></div><b>${c.full}</b></div>`; }).join('')}</div>
+    <div class="r-skills">${COMPS.map(c => { const v = S.scores[c.k], m = MAXES[c.k]; return `<div class="r-skill sk-${c.k}${v >= m ? ' full' : ''}"><div class="r-ring" style="--p:${Math.round(v / m * 100)}"><span>${v}<small>/${m}</small></span></div><b>${c.full}</b></div>`; }).join('')}</div>
     ${nextHtml}
     ${frGame}
     <div class="r-sec"><div class="r-label">Achievements · ${S.ach.length} of ${ACHS.length}</div>
       <div class="r-achs">${ACHS.map(a => { const got = S.ach.includes(a.id); return `<div class="r-ach${got ? '' : ' locked'}">${badge(a, !got)}<b>${a.name}</b><small>${esc(a.how)}</small></div>`; }).join('')}</div></div>
-    <div class="r-btns"><button class="btn big" id="resAgain">Play again</button></div>
+    <div class="r-btns">${tough ? `<button class="btn big ghost2" id="resReplay">Replay your toughest moment</button>` : ''}<button class="btn big" id="resAgain">Play again</button></div>
+    ${tough ? `<p class="r-toughname">Toughest moment: ${esc(tough.title)}</p>` : ''}
   </div>`;
   $('results').hidden = false; $('results').scrollTop = 0; paintFaces($('results'));
-  (() => { const el = $('xpCount'), t0 = performance.now(); const tick = now => { const k = Math.min(1, (now - t0) / 1200); el.textContent = Math.round(xp * k); $('xpBarEnd').style.width = (xp / XP_MAX() * 100 * k) + '%'; if (k < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); })();
+  (() => { const el = $('xpCount'), t0 = performance.now(); const tick = now => { const k = Math.max(0, Math.min(1, (now - t0) / 1200)); el.textContent = Math.round(xp * k); $('xpBarEnd').style.width = (xp / XP_MAX() * 100 * k) + '%'; if (k < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); })();
   $('card').innerHTML = `<div class="comp-chip"><i></i>Your results</div>
     <div class="score">${total}<small> / ${TOTAL_MAX}</small></div>
     <h2>${esc(line)}</h2>
@@ -2436,11 +2729,13 @@ function renderEnd(){
     <ul class="recap">${S.history.map(h => `<li><div class="rp ${h.p < 0 ? 'tneg' : 't' + h.p}">${h.p < 0 ? '−' + Math.abs(h.p) : '+' + h.p}</div><div><b>${esc(h.title)}</b><span>${esc(h.choice.length > 110 ? h.choice.slice(0, 108) + '…' : h.choice)}</span></div></li>`).join('')}</ul>
     <p style="margin-top:20px"><button class="btn" id="againBtn">Play again</button></p>`;
   paintHud(null);
-  $('resAgain').onclick = () => { run++; $('results').hidden = true; $('game').hidden = true; $('hud').hidden = true; $('dayCard').hidden = true; show('scenScreen'); paintFaces($('scenScreen')); };
+  if ($('resReplay')) $('resReplay').onclick = () => startReplay(tough);
+  $('resAgain').onclick = () => { SFX.armed = false; run++; $('results').hidden = true; $('game').hidden = true; $('hud').hidden = true; $('dayCard').hidden = true; show('scenScreen'); paintFaces($('scenScreen')); };
 }
 
 function begin(){
   S = fresh(); run++;
+  requestAnimationFrame(syncHud); setTimeout(syncHud, 300);
   $('friendBar').hidden = SCEN !== 'lunch'; paintFr();
   $('frThemLbl').textContent = '';
   $('toasts').innerHTML = ''; $('typing').innerHTML = ''; renderFeed(); paintHud(null);
@@ -2484,7 +2779,21 @@ loadArt();
 paintFaces();
 buildHud();
 S = fresh(); renderFeed();
-const show = id => { ['titleScreen','intro','scenScreen','friendScreen','briefScreen'].forEach(x => $(x).hidden = x !== id); window.scrollTo(0, 0); };
+const show = id => { ['titleScreen','intro','scenScreen','friendScreen','briefScreen'].forEach(x => $(x).hidden = x !== id); $('homeBtn').hidden = id === 'titleScreen'; window.scrollTo(0, 0); };
+function goHome(){
+  run++; REPLAY = null; SFX.armed = false;
+  ['game','hud','results','dayCard','leaveModal'].forEach(x => $(x).hidden = true);
+  $('breathe').hidden = true; $('toasts').innerHTML = '';
+  document.querySelectorAll('.ach,.lvlup,.float').forEach(e => e.remove());
+  show('titleScreen');
+}
+$('homeBtn').onclick = () => {
+  const inGame = !$('game').hidden && $('results').hidden;
+  if (inGame){ $('leaveModal').hidden = false; $('leaveStay').focus(); } else goHome();
+};
+$('leaveStay').onclick = () => { $('leaveModal').hidden = true; };
+$('leaveGo').onclick = goHome;
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('leaveModal').hidden) $('leaveModal').hidden = true; });
 function setAvatarIndex(k){
   lastPick = (k + POOL.length) % POOL.length; poolOrder = [];
   const a = POOL[lastPick]; FACES.sam = a; PLAYER.avatar = a;
@@ -2503,6 +2812,8 @@ function markGrid(){
 }
 buildAvGrid();
 $('playBtn').onclick = () => show('intro');
+document.querySelectorAll('.soundbtn').forEach(b => b.onclick = () => { SFX.set(!SFX.on); SFX.ac(); if (SFX.on) SFX.click(); });
+paintSound();
 $('readyBtn').onclick = () => { setName(); show('scenScreen'); paintFaces($('scenScreen')); };
 document.querySelectorAll('.scen').forEach(b => b.onclick = () => {
   if (b.dataset.scen === 'lunch'){ show('friendScreen'); rollFriend(); } else chooseScenario('board');
@@ -2536,16 +2847,20 @@ function chooseScenario(id){
   STEPS = sc.steps; ACHS = id === 'lunch' ? ACHS_LUNCH : ACHS_BOARD;
   recalcMax(); buildHud();
   $('briefFace').dataset.face = sc.face; $('briefTitle').textContent = P(sc.title); $('briefLine').textContent = P(sc.line);
-  $('skillTiles').innerHTML = `<div class="bhead">The 4 core skills</div>` + COMPS.map(c => `<div class="tile"><b>${c.full}</b><span>${DEFS[c.k]}</span></div>`).join('');
-  $('achGrid').innerHTML = `<div class="bhead">${ACHS.length} achievements to unlock</div>` + ACHS.map(a => `<div class="achitem">${badge(a)}<span><b>${a.name}</b>${esc(a.how)}</span></div>`).join('');
+  $('skillTiles').innerHTML = COMPS.map((c, j) => `<div class="tile sk-${c.k}"><i>0${j + 1}</i><b>${c.full}</b><span>${DEFS[c.k]}</span></div>`).join('');
+  $('achCount').textContent = '0 / ' + ACHS.length;
+  $('achGrid').innerHTML = ACHS.map(a => `<div class="achitem">${badge(a)}<b>${a.name}</b><span>${esc(a.how)}</span></div>`).join('');
   paintFaces($('briefScreen'));
   show('briefScreen');
 }
 document.documentElement.style.setProperty('--mapbg', `url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCACAAMADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6gqOdtsZNSVU1Jttu30q0Seb+MtbMExVTXMW+uy5zk0eNJC163PeuVe/WAgGs60/ZlwVz0K21uZl4zTLnxFJB944rndL1aLyucVieJ9SLg+V+lRCq5GjppK52I8XEtgNV2LXpZVypJrxOC9uPPyc4zXfeH9TXyAJOtaSnYiMLnUT+IZ489aqDxZKHwTVK4uYXz0rnL+aNJCVNJVNCnS1O/h8Ru4HNXI9VmkXgmvKf7cELAZrotF8RxtgHFcksVJO1jdYdM6W/v5wT1qjDe3DtxmodQ1aIx54qHStThaTnFWsTcTwxvJf3ESc5qvca/LGDyar6vq0McHy46VyMurpMzDNEcS3KxlOmkdfB4llkfbmtNNSuHXIBrzmyvFW6GTxmvQNPv7c2wzjOKqVeSdkOFJNEp1O4B70jarcKMnNQNeQ+Z2qG/wBRt0gPIzUyxDRSoJiz+IZYvWuj8JeITdSqrGvMZr9LiQqDW94Qk8u9XB710UKntTGrDkPd4H3xg1JVHTJN1un0q9WjVjNBWfq7YtX+lX6y9cbFo/0px3BniXi183r/AFridRQtKK6/xK4N++T3rldSPzDFc+IV3Y2orQ0dLsWliG0mrVxorFPnFM8PagkAHmEVtXmr27JwRXk1atWErRR6kKVOUbs56DQAzcLVxNJa355Aq9aarArckU7UdWheIhCM1CxFZuzRSoU1G5l3CEKQprBvEdmI5rZhmMhJPSq8oVpq9GnPSzOOpDqc5JpssrZANa+kaW8bAtkV0VjaxsoOBVXWp/saEoMVzTk5PQ3hFR3I9RgIhwGqtpETJJ8zVgTa+7MVJqIa46HisvZVbm/tadjstVi8yLAbNcx9meOQ9auaVqT3ZAbmtOe3BXOK6aCal7xyV4xavExoo28wGtaG8kiwuTUMCASc0t2m0hhXROS5rGMIvlubUReSLcDWFrNxKoK7jU8GsLFHsPWqNxJ9pcntXNDn5nzbGjat7pV0pnM2WzXb+HJNt2n1rlbJUSTtXRaO4W7TB7134XlvocdeVz3TQ5d1snPatlTkVy3h6TNsn0ro4W4rqmtTGLJzWH4ifFm/0rbbgVzvih8Wb/SpjuEjwjxLIzag+31rIkhZsbq2NXcHUXz60kcQmYYFY1WubU2pp20MCaGVR8marGO5I6tXdRaUrgZFWP7Gj29BUc1NdCnGozzxY7kdzVi2jmLfMTiuzm0uNB0FQx6YCflFNum0JKomYRcwx1n/AGpjPXVz6QWHSsq50cxHdiuJxSbsdyk3FXNLSZiyCo9dt/PiIxzRon+s2V0EmneYufWlTgovUVSTktDys6Q3nnjiluNHPGBXpJ0Ybs4psmjg/wANd3tI3ucXJLY5LQbDyQCwrZu3CpWqmmFBwKr3WmM4IxWdoc3MaXnaxykl1tl4qfz/ADUwa0W0M5JIrPuLbyJcHpUKEZT5jRzcYWM6a0ZpMjOKtRxmOPpXSaTZRXCDJFaUmjw7e1ayq03oYKE90efZlWXIBxWxoly/2xA3rWtcWEELHOKoQRIl4pT1qsNOHN7pnUptLU9q8MSbrVPpXVQHiuM8JNm1T6V2Vt0rsqGMS29cv4tbFk/0rqJOlch4zfFm/wBKziVI8UvI/O1FvrWvbWoiUGsiWTbfOw9auxX+WCsa5a2sjpo6I2YpSBVa+1Awqeaal3GF61kak4mYhTWfs7mnPZle41xjLjPFbui36TAAnmuTn04kbgKu6IjxzAc4rFwdjRyu1Y9AWNXXOKoanbKYWwKuWT5iGabfcxmpitTR7HLWEPk3Jb3rZk1Ly8LWDe3q20pzVSLUkuLgAmtZQb1MedLQ66O/3LnFRtqHz4xTbaOMwBs9qzLm6gimxkZrJS1sNs2ReoMZq5EUlXIrjrm63yLsPFdHpEhMIzVWYRdyxcqqoelcJ4kfa5K12mpuRGcVweruZJSDSTaZpKKlETRNQnVsAnFbdxq8kafMTWdpEMcabmxVLXbhN21TWSfvNFKFo3GXesvLNjNX7CXe6E1z9vbiRg2a3LRDGUrpwlufQ58Sny3PZPBr5t0+ldxbdBXnngiTMCCvQrU/KK9WoefEuydK4nxy+LN/pXbS9K4Dx8+LZxUQKkeTxwmW5f61IdOffkVa0hd9y2fWt2aHC5Ary8VV5ZnoYenzRMFNOcjqasW2jO7gnmrwYrWzozBjzWP1nTRmnsddUc9qNgLeDkVkWTIs2Peut8X4W2OPSvP7GRzd/jVc0mtBpRT1O+snygp15zEaracSYxVq4GYjVrQTPPdcjL3BFV7C0VJVZmq54izHIxArkri+uVf5c4reLc1ZHG7J6npPnhbXCt2rlL1y9397vWXFqtz5WDms6W7uGn3YNQqLvc1U421O1tkHy85rrNK4iFedaXeSsyhs16FopLQioldOzHBpvQt3yb4zXEazEI5Ca76ZMrzXK69YtKDtFVCzLlc5V71ljIQ1gX9xM75Oa6eLS5NxypouNGyM7auFGF7szq1pNWRzum3MocA5xXV29wu1cnms6DTgkmNvNTz2zxMpHStaVOEZXiYyqylGzPW/AsmY1xXpVmflFeT/AA9kPloDXqtkflFd0zmiaM33TXm/xCkxAwr0ef7pryz4jSYRhms4lM4rRZAJST61vTXkaR8kVyWnzqhPNTX0jSodjV4WLg6lSx6uGnyQuaMuoxbjhhWtoV0HkG01wK2d078ZrtPCllLGQZKxeGUFe5t7fnexoeKPnt+fSuMsbcCfPvXY+KGCRYJrlLOZBJ1rvo/Acs/iOlsuFAq+E8xcVl2sylRg1o204B5NU0FzF1bRxOxJFc/c6HDHncBXoMrK4rlNfjkOdlRGo07C5Lq5z8OlxSPtUCtD/hGV27tgqLRI5RdAvnGa7sMn2cdM4qauIlF2RpToRkrs4eLRlilGBXUadF5MQpjhTJU3moiYJrTm5kRyqL0M/V9UFscZqvZX8d0vzYrM8Qp57Haao6ejwDJrafIqd1uZQ53Us9jqgkO7oKsC0jlXgCuZ+3EMBmt/SrwFMsa4acpSdmdk4xSM/UbBYG3AVlXjKyAVua7eIyEAiuYeQEHmu2lFqRxVLW0O88AP8yivXLH7grxrwC/71R717Lp/+rWvSlscUTRufuGvJ/iNA8itsBr1q4HymuL8S2qyhtwzWcSnufP7RXMbnANWYJbiM/ODivQJtMh3nKCq1zpkRQ7UrCUFJ6o3UmlozAs9SRMbxzW1aa8kYwtZb6K7SHapxUkOjOjDINW8FFq5ksXJOxD4h1GW6Q7Aa5VGukfOGr0SPTo9mGWhtLgwfkFRGKhpY1bctbnLWGoSRr+8yK1LbVVZuGqhr1kYlPlrisLTln8/GDUSg3JWMJVJJ6HYzauUIGaZJfCZctzWDfRSIAxBqp/aSxrtJ5rpWGg9xfWJo6D7UkJ3DirUOreYuM1yD3wm+VTzWlY20rRFgDUzwtMpYmoa0mqKsmM1Uvb+V1/dZrBu45xc4wetdRoVn5iL5q1hClZsaqzk7MyYWnkb51NWJmKR8jFdethCBwoqneaasnCrT9kpu1jb2jgrnEO535qwl7Ki4TNdENAY87aWLQtj/MvFb/U4x1Rh9blJ2ZyVy11N2NV1huc42mvSI9LhCcoKeNLiJ4QflULR7Glrrcq/D+3kSVSwNe06cv7pa4Tw5YiN1KrivQbJMIK2bujFKzL8q5FY+oWImB4rdIzUbxg1EZWKaucRPogLE4qA6IPSu4eAHtUZth6VfOTynHx6Kg6rRJoyEcLXXfZx6Un2celV7QXIcU2h5PApBoXtXbfZx6U4W6+lLmQ7M821Tw6HQjbWNa+GAk2dletz2at2quunKD92olK5cUeV694fJtTsTnFeY6j4cu/ObajYr6il0xJFwyiqD+Grdzkxj8qSnYHFM+b9K8O3YuF3I2M16pouhYswHTnFd2nhq3RsiMflWhFpqRrgLUym2VGKR5dceGFefOzvW3p/h8JGAFrtTpy5zirMNoq9qqErCkjjjoXtT4tEAPK12v2ZcdKPs6+lac5nys5VdJUD7tMk0ZW6LXXfZx6Uv2YelP2guQ4waHk9KsRaAMjK11y26+lTLCB2qHMpRMKx0tYcYFbMMW0VOEApwGKhyuNI/9k=")`);
+const syncHud = () => { const h = $('hud').offsetHeight; if (h) document.documentElement.style.setProperty('--hudh', h + 'px'); };
+new ResizeObserver(syncHud).observe($('hud'));
+window.addEventListener('resize', syncHud);
 new ResizeObserver(() => document.documentElement.style.setProperty('--dlgh', ($('dlg').offsetHeight + 30) + 'px')).observe($('dlg'));
 $('startBtn').onclick = () => {
   setName(); $('hudName').textContent = PLAYER.name;
-  $('briefScreen').hidden = true; $('game').hidden = false; $('hud').hidden = false; $('progress').hidden = false;
+  $('briefScreen').hidden = true; $('game').hidden = false; $('hud').hidden = false; $('progress').hidden = false; $('homeBtn').hidden = false;
   begin();
 };
 </script>
