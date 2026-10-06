@@ -1069,6 +1069,7 @@ body::after{background:radial-gradient(ellipse at 50% 40%,rgba(0,30,70,.5),rgba(
 .v3 .c3-btn{display:block;width:100%;border:0;border-top:1px solid rgba(255,255,255,.1);background:#fff;color:#0d1f47;font:800 15px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:16px;cursor:pointer}
 .v3 .c3-btn:hover{background:#ffd34d}
 .v3 .c3-btn:focus-visible{outline:3px solid #ffd34d;outline-offset:-3px}
+.skillbtn:disabled[aria-pressed="true"]{opacity:1;cursor:default}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -1750,7 +1751,7 @@ const STEPS_BOARD = [
   ]},
 
   {type:'skills', comp:'rm', scene:'priya', who:'priya', redeem:true, when:S => (S.rel.priya || 0) < 0, time:'Wednesday · 9:40 AM',
-   title:'A second chance with Priya.', prompt:'Sometimes the best EQ happens after a low EQ moment. Which skills do you want to use with Priya? Pick one or more.',
+   title:'A second chance with Priya.', allSkills:true, prompt:'Sometimes the best EQ happens after a low EQ moment. A real repair takes every skill, so you’ll use all four.',
    subs:{who:'scene', x:'Priya is at her desk, eyes on her laptop. She sees you coming and doesn\'t look up. "Hey." That\'s all you get.'},
    sa:{title:'What\'s going on inside you right now?', options:[
      {x:'Embarrassed. I was short with her because I was stressed, and that wasn\'t fair to her.', p:3, concept:'Owning the feeling',
@@ -2232,6 +2233,7 @@ const CLOSE = {
 };
 function setConvo(who){
   if (!CONVO || !CUTS[who]) return false;
+  if (who !== 'maya') setLunchView('close');   // office scenes never show the cafe table or phone shot
   const big = $('danaBig'), c = CLOSE[who];
   if (big.dataset.who !== who){ big.src = CUTS[who]; big.dataset.who = who; if (who !== 'dana') big.className = 'pose-listen'; }
   $('convoBg').style.backgroundImage = `url('${who === 'maya' ? CAFE_BG : $('mapImg').src}')`;
@@ -2703,6 +2705,10 @@ function renderSkills(st, my){
     e.currentTarget.setAttribute('aria-pressed', picked.has(k));
     $('useSkills').disabled = !picked.size;
   });
+  if (st.allSkills){
+    keys.forEach(k => { picked.add(k); const b = $('sk-'+k); b.setAttribute('aria-pressed', true); b.disabled = true; });
+    $('useSkills').disabled = false; $('useSkills').textContent = 'Use all four skills';
+  }
   $('useSkills').onclick = () => {
     const order = keys.filter(k => picked.has(k));
     S.skillUse = S.skillUse || {sa:0, sm:0, soa:0};
@@ -2714,7 +2720,7 @@ function renderSkills(st, my){
       if (my !== run) return;
       if (idx >= order.length) return outcome();
       const k = order[idx], q = {...st[k], options:shuffled(st[k].options)};
-      $('card').innerHTML = `<div class="comp-chip"><i></i>${name(k)}<em>· skill ${idx + 1} of ${order.length}</em></div><h2>${esc(q.title)}</h2>
+      $('card').innerHTML = `<div class="comp-chip"><i></i>${name(k)}<em>· skill ${idx + 1} of ${order.length + (st.allSkills ? 1 : 0)}</em></div><h2>${esc(q.title)}</h2>
         <div class="opts">${q.options.map((o, j) => `<button class="opt" id="opt-${j}"><span class="k">${'ABCDE'[j]}</span><span>${esc(o.x)}</span></button>`).join('')}</div><div id="fbHost"></div>`;
       q.options.forEach((o, j) => $('opt-'+j).onclick = e => {
         q.options.forEach((_, m) => $('opt-'+m).disabled = true);
@@ -2742,7 +2748,7 @@ function renderSkills(st, my){
       const used = Object.entries(S.skillUse).filter(([, v]) => v > 0).map(([k]) => k);
       const nudge = order.length === 1 && S.skillMoments ? `<p class="inner">You've leaned on ${name(order[0])}. Try pairing it with another skill next time.</p>` : '';
       S.skillMoments = (S.skillMoments || 0) + 1;
-      $('card').innerHTML = `<div class="comp-chip"><i></i>Relationship Management · outcome</div><h2>${esc(st.outcome)}</h2>
+      $('card').innerHTML = `<div class="comp-chip"><i></i>Relationship Management · ${st.allSkills ? 'skill 4 of 4' : 'outcome'}</div><h2>${esc(st.outcome)}</h2>
         <div class="fb" style="border-top:0;margin-top:0;padding-top:0"><div class="fb-mid"><b class="rate r${rp < 0 ? 'neg' : rp}"><span class="xp">${rp < 0 ? '−' + Math.abs(rp) * 10 : '+' + rp * 10} XP</span></b>
         <p>${esc(nm(st.redeem ? (rp >= 2 ? 'That\'s a comeback. What you did after the low moment is what Priya will remember.' : rp === 1 ? 'Things held steady. A clear acknowledgment would have gone further.' : 'Priya pulled back a little more. Owning the moment is the step that turns it around.') : rp >= 2 ? 'The way you used your skills changed how Maya felt in this moment.' : rp === 1 ? 'Things held steady.' : 'Maya pulled back a little.'))}</p></div>${nudge}
         <button class="btn" id="nextBtn">Continue ▶</button></div>`;
@@ -3070,6 +3076,7 @@ function renderEnd(replayed){
 
 function begin(){
   S = fresh(); run++;
+  setLunchView('close');
   requestAnimationFrame(syncHud); setTimeout(syncHud, 300);
   $('friendBar').hidden = SCEN !== 'lunch'; paintFr();
   $('frThemLbl').textContent = '';
